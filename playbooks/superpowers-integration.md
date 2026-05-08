@@ -26,12 +26,15 @@ Generic SP skill triggers ("use TDD when implementing any feature") are OVERRIDD
 
 | SP skill | Default trigger | Override (when typed agent active) |
 |---|---|---|
+| `subagent-driven-development` | when work warrants subagents | Always — but the subagents are typed, not generic |
 | `test-driven-development` | "implementing any feature" | Embedded in implementer IRON LAW. Never invoked separately. |
 | `verification-before-completion` | "at every action" | Only at chain stages with `kind: verification` |
 | `writing-plans` | "before any implementation" | Only at the planning phase of the implementer's protocol |
-| `brainstorming` | "before any creative work" | Only at CONDITIONAL stages in the AI-DLC binding |
 | `systematic-debugging` | universal | Universal (no override; IRON LAW applies regardless) |
-| `subagent-driven-development` | when work warrants subagents | Always — but the subagents are typed, not generic |
+| `receiving-code-review` | when re-dispatched after review | Active during implementer re-dispatch loop in the post-implementation chain |
+| `brainstorming` | "before any creative work" | Only at CONDITIONAL stages in the AI-DLC binding |
+
+The first six skills are explicitly listed in [SPEC §8.2](https://github.com/viblocks/viv-typed-agents/blob/main/SPEC.md) as the integration surface. `brainstorming` is included because AI-DLC stages reference it, but it is not part of the SPEC §8.2 contract.
 
 ## When generic SP triggers ARE active
 

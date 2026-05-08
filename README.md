@@ -31,15 +31,17 @@ viv-orchestration-rules/
 
 ## Five playbooks
 
-| Playbook | Purpose | Required tier |
-|---|---|---|
-| `dispatch-protocol.md` | The IRON LAW: typed agent dispatch by path | T2+ |
-| `post-implementation-chain.md` | What runs after a typed implementer completes | T3+ (uses workflows) |
-| `ai-dlc-integration.md` | How typed agents bind to AI-DLC stages | T5 (with AI-DLC consumer) |
-| `superpowers-integration.md` | How typed agents specialize Superpowers skills | T5 (with SP consumer) |
-| `issue-driven-flow.md` | Autonomous change flow from issue tracker | T5 (with issue tracker) |
+This repo IS the Tier 5 component (per [composition/tiers.md](https://github.com/viblocks/viv-typed-agents/blob/main/composition/tiers.md)). Adopting it means you're at T5 by definition. The "Minimum dependencies" column lists the other components each playbook **assumes** the consumer has already vendored.
 
-A consumer at Tier 3 needs only the first two. Tier 5 consumers (AI-DLC + Superpowers) consume all five.
+| Playbook | Purpose | Minimum dependencies |
+|---|---|---|
+| `dispatch-protocol.md` | The IRON LAW: typed agent dispatch by path | T3 (routing-table required) |
+| `post-implementation-chain.md` | What runs after a typed implementer completes | T3 (workflow rules required) |
+| `ai-dlc-integration.md` | How typed agents bind to AI-DLC stages | T5 + AI-DLC external |
+| `superpowers-integration.md` | How typed agents specialize Superpowers skills | T5 + Superpowers external |
+| `issue-driven-flow.md` | Autonomous change flow from issue tracker | T5 + issue tracker external |
+
+A consumer who vendors this repo without `viv-routing` and `viv-workflows` cannot meaningfully execute `dispatch-protocol` or `post-implementation-chain` — the playbooks reference contracts published by those components. Without `viv-hooks` (T4), the playbooks describe behavior that is **advisory only**; structural enforcement requires the hooks layer.
 
 ## Quick start (consumer)
 

@@ -101,6 +101,15 @@ Behavioral: this CLAUDE.md → LLM dispatches typed agents
 Structural: viv-hooks → wrong dispatch is blocked at Edit/Write time
 ```
 
+`viv-hooks` ships four explicit hook types (per [ADR-RD-006](https://github.com/viblocks/viv-typed-agents/blob/main/architecture/decisions/ADR-RD-006-three-hook-types.md)):
+
+| Type | Role |
+|---|---|
+| **deny** | Hard block on contract violation (routing, secrets, self-mod, isolation, commit trailer) |
+| **advisory** | Warn-and-allow with `additionalContext` injection (post-impl chain, evidence, fix-intent, skill-installed) |
+| **refinement** | Positive override that allows what `deny` would block (fast-lane for Class A non-app edits) |
+| **lifecycle** | Marker register/cleanup; no allow/deny decision |
+
 If your project does not adopt `viv-hooks`, the IRON LAW is **advisory** — the LLM follows it because it's documented, not because it's enforced. Quality drops accordingly.
 
 ## Project-specific extensions

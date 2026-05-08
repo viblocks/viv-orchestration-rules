@@ -33,16 +33,18 @@ Generic AI-DLC stages: Test Strategy/Environment, Test Diagnosis, Test Implement
 
 **Typed agent integration:**
 - **Test Implementation** dispatches typed implementers (TDD) and runs the post-impl chain per level
-- **Test Environment Setup** dispatches `infra-devops-implementer`
-- **CI Pipeline Implementation** dispatches `infra-devops-implementer` for workflow files
+- **Test Environment Setup** dispatches the typed implementer for the `infra-devops` domain (per `routing-table.json`)
+- **CI Pipeline Implementation** dispatches the typed implementer for the `infra-devops` domain for workflow files
 - E2E fixes during validation respect the IRON LAW — typed agents only
+
+> Per [SPEC Appendix B invariant 7](https://github.com/viblocks/viv-typed-agents/blob/main/SPEC.md), agent names are not hardcoded outside `viv-agents` and `routing-table.json`. Always resolve via routing lookup.
 
 ### DEPLOYMENT
 
 Generic AI-DLC stages: Deployment Strategy, CD Pipeline Diagnosis/Design/Implementation, Deployment Execution, Post-Deploy Validation, Rollback Validation.
 
 **Typed agent integration:**
-- **CD Pipeline Implementation** dispatches `infra-devops-implementer`
+- **CD Pipeline Implementation** dispatches the typed implementer for the `infra-devops` domain (per `routing-table.json`)
 - The post-impl chain runs after every infra change (verification + reviewer + security)
 
 ## Mid-Workflow Changes

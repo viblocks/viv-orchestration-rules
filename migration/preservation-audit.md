@@ -73,3 +73,12 @@ All viblocks orchestration behaviors representable. No behavioral coverage loss.
 ## Identified during post-extraction review
 
 - **MIN-1 (resolved):** the viblocks-style example was named `CLAUDE.md`, which collided with hook protections on root-level `CLAUDE.md` filenames in self-hosting consumers. Renamed to `CLAUDE.example.md`. Consumers rename when vendoring.
+
+## Post-publication SPEC alignment review (2026-05-08)
+
+A second review aligned this repo against the SPEC (Goals §1.1, ADR Index §5, Inter-Component Contracts §6, Composition Tiers §7, External Dependencies §8, Apéndice B invariants). Findings and resolutions:
+
+- **MED-1 (resolved):** README "Five playbooks" tier table conflated two semantics. Per `composition/tiers.md`, this repo IS the T5 component. The table now reads "Minimum dependencies" (other components the playbook assumes), not "Required tier". Clarification added that without T3 dependencies, the playbooks are not meaningfully executable.
+- **LOW-1 (resolved):** `playbooks/ai-dlc-integration.md` hardcoded `infra-devops-implementer` agent name in three places, violating SPEC Apéndice B invariant 7. Replaced with "the typed implementer for the `infra-devops` domain (per `routing-table.json`)" abstraction.
+- **LOW-2 (resolved):** `playbooks/superpowers-integration.md` skill bindings table omitted `receiving-code-review` (listed in SPEC §8.2). Added with the "active during implementer re-dispatch loop" semantic. `brainstorming` retained but explicitly marked as not part of SPEC §8.2 contract.
+- **LOW-3 (resolved):** `CLAUDE.template.md` "Enforcement is structural" section did not introduce the four hook types from ADR-RD-006. Added a brief enumeration table (deny / advisory / refinement / lifecycle) so consumers reading the template understand what the hooks layer provides.
