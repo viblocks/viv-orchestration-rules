@@ -35,7 +35,9 @@ Evaluate the stage's `condition`:
 
 If condition NOT satisfied: SKIP. Log `security review: N/A — <reason>` for the post-chain output.
 
-If condition satisfied: dispatch `security-reviewer` (or the stage's `agent` field). CRITICAL/HIGH findings block.
+If condition satisfied: dispatch the agent named in the stage's `agent` field (resolved at consumer install time; in the viblocks-style example this is the security-domain reviewer declared in `viv-agents`). CRITICAL/HIGH findings block.
+
+> Per [SPEC Appendix B invariant 7](https://github.com/viblocks/viv-typed-agents/blob/main/SPEC.md), agent names are not hardcoded in playbooks. The canonical source is the `agent` field in `post-implementation-chain.json` (consumer-customizable).
 
 ### `kind: commit`
 
