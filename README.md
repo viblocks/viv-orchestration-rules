@@ -1,5 +1,15 @@
 # viv-orchestration-rules
 
+> ⚠️ **Internal component of [viv-typed-agents](https://github.com/viblocks/viv-typed-agents).**
+>
+> The recommended install path is the typed-agents product, not this repo standalone:
+> ```bash
+> git clone https://github.com/viblocks/viv-typed-agents
+> ./viv-typed-agents/scripts/install.sh /path/to/your-project --tier 5
+> ```
+>
+> This repo is public for transparency and as a surgical-use escape hatch (`cp -r` a single playbook). See [ADR-RD-010](https://github.com/viblocks/viv-typed-agents/blob/main/architecture/decisions/ADR-RD-010-product-composition.md) for product composition rationale.
+
 Behavioral orchestration rules for the typed-agents strategy. This is the **Tier 5** component (full system) that ties the other five together.
 
 Per [ADR-RD-008](https://github.com/viblocks/viv-typed-agents/blob/main/architecture/decisions/ADR-RD-008-pure-descriptors.md), this repo ships only `.md`. No executable code, no JSON schemas — orchestration rules are **prose for the LLM**, not data for tooling.
