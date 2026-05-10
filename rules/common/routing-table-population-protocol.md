@@ -1,7 +1,7 @@
 # Routing Table Population Protocol
 
 **Status**: ACTIVE
-**Scope**: Project-agnostic. Applicable to any project using AI-DLC + Superpowers with typed agents.
+**Scope**: Project-agnostic and orchestrator-agnostic. Applicable to any project using typed agents, with or without an SDLC orchestrator (e.g. AI-DLC).
 
 ---
 
@@ -10,8 +10,8 @@
 The routing table (`.claude/routing/routing-table.json`) maps service paths to typed agents. When a service has no row, the enforcement hook (Layer 2, PreToolUse) blocks dispatch — but there is no formal protocol for populating the table.
 
 Two scenarios without coverage:
-1. **Brownfield first adoption**: AI-DLC is adopted in an existing project. All services are "unknown" to the routing table.
-2. **New incremental service**: AI-DLC creates a new service during Code Generation. The service has no row.
+1. **Brownfield first adoption**: typed-agents is adopted in an existing project. All services are "unknown" to the routing table.
+2. **New incremental service**: a new service is created during the project's lifecycle. The service has no row.
 
 ---
 
@@ -19,16 +19,16 @@ Two scenarios without coverage:
 
 Two population moments, same action: detect service without a row, classify stack, add row.
 
-### Moment 1 — Post-RE Population (brownfield first adoption)
+### Moment 1 — Bulk Population (brownfield first adoption)
 
-**When**: Right after Reverse Engineering completes, before Requirements Analysis.
+**When**: When typed-agents is first adopted in an existing project. Orchestrators with a Reverse Engineering stage typically wire this in as a post-RE step (right after RE completes, before Requirements Analysis); ad-hoc adoption runs it once during initial setup.
 
-**Trigger**: RE generates `component-inventory.md` and `technology-stack.md`.
+**Trigger** (orchestrator-driven): an inventory of components and their technology stacks is available — either from an RE-stage artifact (e.g. `component-inventory.md` + `technology-stack.md`) or from manual project audit.
 
 **Protocol**:
 
-1. Read `component-inventory.md` — list of services with type (Application, Infrastructure, Shared, Test)
-2. Read `technology-stack.md` — stack per service (NestJS, React, Python, etc.)
+1. Read the component inventory — list of services with type (Application, Infrastructure, Shared, Test)
+2. Read the technology stack mapping per service (NestJS, React, Python, etc.)
 3. For each Application or Shared service:
    - Classify domain by stack:
      - NestJS/Express/Fastify → Backend
@@ -43,7 +43,7 @@ Two population moments, same action: detect service without a row, classify stac
 **Example output**:
 
 ```
-Post-RE: Routing Table Generated
+Bulk Population: Routing Table Generated
 
 | Domain   | Paths                                     | Implementer              | Reviewer              |
 |----------|-------------------------------------------|--------------------------|-----------------------|
@@ -51,22 +51,22 @@ Post-RE: Routing Table Generated
 | Frontend | services/web/**                           | <domain>-implementer     | <domain>-reviewer     |
 | Unmatched| services/ml-engine/** (Python/FastAPI)    | -- (no typed agent)      | --                    |
 
-! 1 service without typed agent. Will be resolved in Workflow Planning.
+! 1 service without typed agent. Will be resolved before any code generation.
 ```
 
-### Moment 2 — Pre-Dispatch Population (new incremental service)
+### Moment 2 — Incremental Population (new service introduced)
 
-**When**: Code Generation Part 1 (Planning) produces a plan with paths in `services/*` or `packages/*` without a row in the routing table.
+**When**: a code-generation plan introduces paths in `services/*` or `packages/*` (or any enforced route in `routing-table.json`) without a row in the routing table. Orchestrators with a Code Generation stage typically catch this during plan review (Part 1); ad-hoc adoption catches it at the moment a typed agent is first dispatched to a new path.
 
-**Trigger**: `writing-plans` generates the plan and the orchestrator detects new paths.
+**Trigger** (orchestrator-driven): a plan is generated and a path-classification check detects new unmapped paths.
 
 **Protocol**:
 
 1. Detect new paths in the plan without a row in the routing table
-2. Classify domain based on already-completed design artifacts (NFR Requirements define stack, Infra Design defines deployment)
-3. Add Step 0 to the plan:
+2. Classify domain based on already-completed design artifacts (NFR/stack documents, infrastructure design)
+3. Add a "Step 0" (or equivalent leading task) to the plan:
    - Add entry to `.claude/routing/routing-table.json`
-4. User approves the complete plan (including Step 0) at the Code Gen Part 1 approval gate
+4. User approves the complete plan (including the routing-table update) at the appropriate approval gate
 
 **Example output**:
 
@@ -84,13 +84,13 @@ Step 0: Routing Table Update
 
 When a service uses a stack without an existing typed agent:
 
-1. Post-RE or Step 0 marks it as "unmatched"
-2. In Workflow Planning, the orchestrator presents options:
-   - **A)** Create a new typed agent for the stack (see `common/typed-agent-mechanism.md` — "Extensibility — Adding a New Domain")
+1. The bulk-population step (Moment 1) or the incremental-population step (Moment 2) marks it as "unmatched"
+2. The orchestrator (or user, if no orchestrator) presents options:
+   - **A)** Create a new typed agent for the stack (see [`common/typed-agent-mechanism.md`](typed-agent-mechanism.md) — "Extensibility — Adding a New Domain")
    - **B)** Use `general-purpose` for this service (no domain patterns, lower quality guarantee)
    - **C)** Defer — do not touch this service in this cycle
 3. The decision is recorded in the routing table with the corresponding row
-4. If option A is chosen, the new typed agent is created BEFORE Code Generation
+4. If option A is chosen, the new typed agent is created BEFORE any codegen targets that service
 
 ---
 

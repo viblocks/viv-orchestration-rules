@@ -16,7 +16,9 @@ After any typed implementer agent completes:
 
 ### Post-Chain Output (MANDATORY)
 
-After the chain completes, present this structured output to the user **AND append the same content as a structured entry to `aidlc-docs/audit.md`** (per `audit-and-logging.md` schema). The append is what makes the chain auditable post-mortem and enables the L4b commit-time chain-evidence gate (#34/2) — a chain run with no audit.md entry is indistinguishable from a chain that never ran.
+After the chain completes, present this structured output to the user. **If the consumer has an audit-log discipline** (e.g. AI-DLC consumers maintain `aidlc-docs/audit.md` per their orchestrator's audit-and-logging schema), append the same content as a structured entry to that audit log. The append is what makes the chain auditable post-mortem and enables a commit-time chain-evidence gate — a chain run with no audit log entry is indistinguishable from a chain that never ran when audit logging is in scope.
+
+For consumers without an audit-log discipline (typed-agents-core only, no orchestrator), the structured output is the user-facing record; the L4b commit-time chain-evidence gate is opt-in via the consumer's hook configuration.
 
 #### Format (strictly parseable — contract for the L4b gate parser)
 

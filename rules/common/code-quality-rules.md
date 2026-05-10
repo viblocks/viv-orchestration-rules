@@ -19,9 +19,9 @@
 
 ### Cuándo aplicar
 
-1. **Code generation (Construction)**: el plan de código generado por el typed implementer debe justificar la división de responsabilidades antes de generar archivos.
+1. **Code generation**: el plan de código generado por el typed implementer debe justificar la división de responsabilidades antes de generar archivos.
 2. **Code review (Post-Implementation Chain)**: el typed reviewer verifica SOLID explícitamente. Violaciones S, D o acoplamiento alto = finding HIGH mínimo.
-3. **Diseño (Application Design / Functional Design)**: si el diseño propuesto acopla módulos que cambian por razones distintas → STOP, rediseñar antes de continuar.
+3. **Diseño (any design phase, regardless of orchestrator)**: si el diseño propuesto acopla módulos que cambian por razones distintas → STOP, rediseñar antes de continuar.
 4. **Triage de issues**: si el root cause de un bug es una violación SOLID (e.g., god class, tight coupling) → el fix debe corregir el diseño, no solo parchear el síntoma.
 
 ### Anti-patrones bloqueantes

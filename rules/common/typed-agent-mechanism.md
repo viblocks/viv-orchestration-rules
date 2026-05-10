@@ -168,7 +168,7 @@ Both typed reviewers enforce a **reuse-before-reinvent** check:
 - **Frontend reviewer**: triggers on new component files — finding is MEDIUM (potential duplication); escalates to HIGH if an existing component clearly covers the use case and no "existing components evaluated" rationale exists in the design spec.
 - **Backend reviewer**: triggers on new service/module files — same escalation logic.
 
-Integration with DESIGN PATH: the design spec section "Existing components evaluated" provides the rationale that prevents escalation.
+Integration with design-driven flows (any orchestrator that uses a design-spec phase, e.g. AI-DLC's DESIGN path): the design spec section "Existing components evaluated" provides the rationale that prevents escalation.
 
 ---
 
@@ -337,12 +337,12 @@ Add the new agent to the Layer 2 hook allowlist.
 
 ### Routing Table Population Protocol
 
-The routing table is a living registry that grows with the project. It is populated at two moments:
+The routing table is a living registry that grows with the project. It is populated at two moments (independent of any specific orchestrator's stage names):
 
-1. **Post-RE (brownfield first adoption)**: After Reverse Engineering, before Requirements Analysis. Read `component-inventory.md` + `technology-stack.md` to generate bulk rows.
-2. **Pre-Dispatch (new service incremental)**: In Code Generation Part 1, Step 0 of the plan adds the row before dispatching typed agents.
+1. **Bulk population (brownfield first adoption)**: When adopting typed-agents in an existing project, read the project's component/technology inventory to generate bulk rows. Orchestrators with a Reverse Engineering stage typically wire this in as a post-RE step; ad-hoc adoption runs it once manually.
+2. **Incremental population (new service)**: When a new service is introduced, add the row before dispatching typed agents to it. Orchestrators with a Code Generation stage typically add this as Step 0 of the plan; ad-hoc adoption updates the table at the moment a new service appears.
 
-Services with a stack that has no existing typed agent are marked "unmatched" and resolved at Workflow Planning with a user decision.
+Services with a stack that has no existing typed agent are marked "unmatched" and resolved by user decision (either creating a new typed agent for the stack, or assigning `general-purpose` for that domain).
 
 ---
 
