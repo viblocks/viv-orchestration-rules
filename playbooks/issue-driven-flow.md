@@ -134,3 +134,16 @@ Issue-driven autonomous change is the **highest** capability tier (Tier 5). It r
 - This playbook (Tier 5)
 
 Without these, the flow degrades to user-supervised execution at every step. With them, an issue closes itself end-to-end with audit trail and evidence.
+
+## Foundations (read for depth)
+
+This page is the **autonomous flow entry point**. The comprehensive treatment lives in `_common/`:
+
+| Topic | Reference |
+|---|---|
+| Core change flow protocol (DIRECT/CROSS-DOMAIN/DESIGN/REVERT detail) | [`_common/core-change-flow-protocol.md`](_common/core-change-flow-protocol.md) |
+| Issue analysis discipline (Phase 1 + Phase 2 with fast-pass) | [`_common/overconfidence-prevention.md`](_common/overconfidence-prevention.md) |
+| Debugging gate (Root cause: contract for fix-intent) | [`_common/debugging-gate.md`](_common/debugging-gate.md) |
+| Audit-and-logging (issue close evidence schema) | [`_common/audit-and-logging.md`](_common/audit-and-logging.md) |
+| Friction reporting (when issues block, where to file) | [`_common/friction-reporting.md`](_common/friction-reporting.md) |
+| Routing table population (when an issue references new paths) | [`_common/routing-table-population-protocol.md`](_common/routing-table-population-protocol.md) |

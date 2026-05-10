@@ -116,6 +116,32 @@ If your project does not adopt `viv-hooks`, the IRON LAW is **advisory** — the
 
 `<INSERT_PROJECT_EXTENSIONS_HERE>` — Project-specific rules that don't generalize (domain advisors, deploy gates, etc.) live below. Keep generic content above; project drift below.
 
+## Playbook depth available
+
+The full orchestration content (per [ADR-RD-011](https://github.com/viblocks/viv-typed-agents/blob/main/architecture/decisions/ADR-RD-011-extend-from-aidlc-orchestrator.md)) is organized as:
+
+```
+playbooks/
+├── <5 entry-point summaries>
+├── _common/        29 cross-cutting playbooks
+│                   (iron-law, typed-agent-mechanism, debugging-gate,
+│                    overconfidence-prevention, code-quality-rules,
+│                    routing-table-population-protocol, audit-and-logging,
+│                    friction-reporting, stage-structural-patterns,
+│                    adaptive-execution, depth-levels, workflow-changes,
+│                    frontend-change-discipline, full SP integration,
+│                    welcome-message, terminology, ...)
+├── ai-dlc/         per-stage AI-DLC rules (31 files across 5 phases)
+│   ├── inception/  9 stages
+│   ├── construction/ 6 stages
+│   ├── verification/ 8 stages
+│   ├── deployment/  7 stages
+│   └── operations/  1 placeholder
+└── extensions/     opt-in extensions (security baseline, property-based testing)
+```
+
+When working in an AI-DLC stage, read the corresponding `playbooks/ai-dlc/<phase>/<stage>.md`. When invoking a cross-cutting discipline (debugging, issue analysis, friction reporting), read the corresponding `playbooks/_common/<topic>.md`.
+
 ---
 
 **This template is part of the typed-agents strategy.** See `viv-orchestration-rules` for the canonical playbooks.

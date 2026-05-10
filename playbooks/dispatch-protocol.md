@@ -82,3 +82,16 @@ These thoughts signal a violation about to happen — STOP:
 Dispatch by path (not by keyword) is **deterministic**. Any LLM following this protocol on the same routing table reaches the same dispatch decision. That's what makes structural enforcement (viv-hooks) viable: the hook can verify the LLM's decision against the same rule.
 
 See [ADR-RD-007](https://github.com/viblocks/viv-typed-agents/blob/main/architecture/decisions/ADR-RD-007-defer-validation.md) for the rationale on Edit/Write-time validation.
+
+## Foundations (read for depth)
+
+This page is the **operational entry point**. The comprehensive treatment lives in `_common/`:
+
+| Topic | Reference |
+|---|---|
+| IRON LAW formal statement | [`_common/iron-law.md`](_common/iron-law.md) |
+| Typed agent mechanism (full mechanics) | [`_common/typed-agent-mechanism.md`](_common/typed-agent-mechanism.md) |
+| Subagent dispatch contract | [`_common/subagent-dispatch-contract.md`](_common/subagent-dispatch-contract.md) |
+| Routing table population (new domains) | [`_common/routing-table-population-protocol.md`](_common/routing-table-population-protocol.md) |
+| L5 debugging gate (Root cause: contract) | [`_common/debugging-gate.md`](_common/debugging-gate.md) |
+| Code quality (SOLID enforcement) | [`_common/code-quality-rules.md`](_common/code-quality-rules.md) |

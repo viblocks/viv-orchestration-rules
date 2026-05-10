@@ -98,3 +98,16 @@ This is orchestrated by `playbooks/issue-driven-flow.md`.
 The chain orchestration is **behavioral** — the LLM reads the rule JSON and executes the stages. A code implementation is also possible (in `viv-hooks/lib/` for example), but the LLM-driven flow allows escalation, scope adjustment, and conversational recovery that pure automation can't provide.
 
 See [ADR-003](../architecture/decisions/ADR-003-iron-law-as-prose.md) for the rationale on prose vs. code.
+
+## Foundations (read for depth)
+
+This page is the **orchestration entry point**. The comprehensive treatment lives in `_common/`:
+
+| Topic | Reference |
+|---|---|
+| Chain rule definition (consumed by hooks) | [`_common/post-implementation-chain.md`](_common/post-implementation-chain.md) |
+| Enforcement architecture (5 layers) | [`_common/enforcement-architecture.md`](_common/enforcement-architecture.md) |
+| Audit-and-logging discipline | [`_common/audit-and-logging.md`](_common/audit-and-logging.md) |
+| Git workflow (commit conventions) | [`_common/git-workflow.md`](_common/git-workflow.md) |
+| Debugging gate (Root cause: contract) | [`_common/debugging-gate.md`](_common/debugging-gate.md) |
+| Verification-before-completion (SP integration) | [`_common/superpowers-integration.md`](_common/superpowers-integration.md) |
