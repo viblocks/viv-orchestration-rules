@@ -1,72 +1,82 @@
-# AI-DLC Integration Playbook
+# AI-DLC Integration — Index
 
-How typed agents bind to AI-DLC stages.
+How typed agents bind to AI-DLC stages. This page is the **entry point**; per-phase detail lives in `playbooks/ai-dlc/`.
 
-> AI-DLC (Application Innovation & Development Lifecycle) is an **external framework**, not part of this strategy. This playbook describes integration only. See [ADR-002](../architecture/decisions/ADR-002-external-deps-referenced.md).
-
-## Scope
-
-This playbook applies when the consumer adopts AI-DLC alongside the typed-agents strategy. Consumers without AI-DLC can ignore this playbook entirely.
+> AI-DLC (Application Innovation & Development Lifecycle) is the workflow framework. Per [ADR-002](../architecture/decisions/ADR-002-external-deps-referenced.md) (revised) the **integration content** is now hosted here; AI-DLC the framework itself remains an external dependency.
 
 ## The four phases
 
-AI-DLC defines four phases. Typed agents replace AI-DLC's generic implementer references.
+```
+INCEPTION → CONSTRUCTION → VERIFICATION → DEPLOYMENT → OPERATIONS
+```
 
-### INCEPTION
-
-Generic AI-DLC stages: Workspace Detection, Reverse Engineering (brownfield), Requirements Analysis, User Stories, Workflow Planning, Application Design, Units Generation.
-
-**Typed agent integration:** none — Inception is design and analysis. No code is generated. Use AI-DLC's standard agents.
-
-### CONSTRUCTION
-
-Generic AI-DLC stages: Functional Design, NFR Requirements/Design, Infrastructure Design, Code Generation.
-
-**Typed agent integration:**
-- **Code Generation** stage dispatches **typed implementers** per the routing table — never `general-purpose`
-- For multi-domain units, split per domain (per `playbooks/dispatch-protocol.md` cross-domain rules)
-- Each typed implementer's IRON LAW (with TDD embedded) is the AI-DLC code-generation contract
-
-### VERIFICATION
-
-Generic AI-DLC stages: Test Strategy/Environment, Test Diagnosis, Test Implementation, E2E Validation, CI Pipeline Implementation, Production Readiness Gate.
-
-**Typed agent integration:**
-- **Test Implementation** dispatches typed implementers (TDD) and runs the post-impl chain per level
-- **Test Environment Setup** dispatches the typed implementer for the `infra-devops` domain (per `routing-table.json`)
-- **CI Pipeline Implementation** dispatches the typed implementer for the `infra-devops` domain for workflow files
-- E2E fixes during validation respect the IRON LAW — typed agents only
-
-> Per [SPEC Appendix B invariant 7](https://github.com/viblocks/viv-typed-agents/blob/main/SPEC.md), agent names are not hardcoded outside `viv-agents` and `routing-table.json`. Always resolve via routing lookup.
-
-### DEPLOYMENT
-
-Generic AI-DLC stages: Deployment Strategy, CD Pipeline Diagnosis/Design/Implementation, Deployment Execution, Post-Deploy Validation, Rollback Validation.
-
-**Typed agent integration:**
-- **CD Pipeline Implementation** dispatches the typed implementer for the `infra-devops` domain (per `routing-table.json`)
-- The post-impl chain runs after every infra change (verification + reviewer + security)
-
-## Mid-Workflow Changes
-
-When a mid-workflow change occurs (add/skip stages, change depth, restart), AI-DLC executes its workflow-changes protocol first. Typed-agent dispatch rules apply unchanged — the IRON LAW does not pause for mid-workflow adjustments.
-
-## Skill invocation override
-
-When AI-DLC is active, generic Superpowers triggers are OVERRIDDEN by AI-DLC stage bindings (see `playbooks/superpowers-integration.md`). Concrete:
-
-| SP skill | Generic trigger | AI-DLC override |
+| Phase | Purpose | Per-stage rules |
 |---|---|---|
-| `brainstorming` | "before any creative work" | Only at stages marked CONDITIONAL in the binding |
-| `test-driven-development` | "when implementing any feature" | Embedded in typed agent IRON LAW; never invoked separately |
+| **Inception** | What to build and why | [9 stages](ai-dlc/inception/) |
+| **Construction** | How to build it (designs + codegen) | [6 stages](ai-dlc/construction/) |
+| **Verification** | Does it work? Is it ready? | [8 stages](ai-dlc/verification/) |
+| **Deployment** | Ship it safely | [7 stages](ai-dlc/deployment/) |
+| **Operations** | Run it (placeholder) | [1 file](ai-dlc/operations/) |
+
+## Cross-cutting foundations (`_common/`)
+
+| File | Purpose |
+|---|---|
+| [`_common/process-overview.md`](_common/process-overview.md) | Full AI-DLC workflow narrative |
+| [`_common/iron-law.md`](_common/iron-law.md) | IRON LAW formal statement |
+| [`_common/typed-agent-mechanism.md`](_common/typed-agent-mechanism.md) | How typed agents work mechanically |
+| [`_common/post-implementation-chain.md`](_common/post-implementation-chain.md) | Chain rule definition |
+| [`_common/superpowers-integration.md`](_common/superpowers-integration.md) | Full SP skill bindings per stage |
+| [`_common/sp-precedence.md`](_common/sp-precedence.md) | SP override hierarchy |
+| [`_common/core-change-flow-protocol.md`](_common/core-change-flow-protocol.md) | Change flow protocol (DIRECT / CROSS-DOMAIN / DESIGN / REVERT) |
+| [`_common/adaptive-execution.md`](_common/adaptive-execution.md) | Minimal/standard/comprehensive depth selection |
+| [`_common/depth-levels.md`](_common/depth-levels.md) | What each depth level means per stage |
+| [`_common/workflow-changes.md`](_common/workflow-changes.md) | Mid-workflow change protocol |
+| [`_common/stage-structural-patterns.md`](_common/stage-structural-patterns.md) | Patterns common to every stage (questions, approval, audit) |
+| [`_common/audit-and-logging.md`](_common/audit-and-logging.md) | `audit.md` + JSONL audit trails |
+| [`_common/welcome-message.md`](_common/welcome-message.md) | Workflow activation banner |
+| [`_common/session-continuity.md`](_common/session-continuity.md) | Resuming interrupted sessions |
+| [`_common/question-format-guide.md`](_common/question-format-guide.md) | A/B/C/D/E format + ambiguity resolution |
+
+## Critical override doctrine
+
+When AI-DLC is active, generic Superpowers triggers are **OVERRIDDEN** by stage bindings in [`_common/superpowers-integration.md`](_common/superpowers-integration.md). Concrete:
+
+| SP skill | Default trigger | AI-DLC override |
+|---|---|---|
+| `brainstorming` | "before any creative work" | Only at CONDITIONAL stages in the binding |
+| `test-driven-development` | "implementing any feature" | Embedded in typed agent IRON LAW; never separate |
 | `writing-plans` | "before any implementation" | Only at Code Generation Part 1 |
 | `verification-before-completion` | "at every action" | At gates defined in the binding |
-| `systematic-debugging` | (no override; universal IRON LAW) | Same as default |
+| `systematic-debugging` | universal | Universal (no override) |
 
-## Why this exists
+See [`_common/sp-precedence.md`](_common/sp-precedence.md) for the full precedence table.
 
-AI-DLC stages have formal approval gates, audit trails, and sequential dependencies. Generic SP triggers firing out of sequence break orchestration. The IRON LAW provides the one-way constraint: typed agents replace generic implementers wherever AI-DLC requires implementation.
+## Typed agent integration per phase (high-level)
 
-## Reference: where AI-DLC rule details live
+| Phase | Where typed agents are dispatched |
+|---|---|
+| Inception | None (design only; no code) |
+| Construction | **Code Generation** dispatches typed implementers per routing-table |
+| Verification | **Test Implementation** dispatches typed implementers; **Test Environment Setup** + **CI Pipeline** dispatch the infra-devops domain implementer |
+| Deployment | **CD Pipeline Implementation** dispatches the infra-devops domain implementer; chain post-impl after every infra change |
 
-A consumer adopting AI-DLC vendors its own rule details at `<.aidlc-rule-details/>` (or equivalent). This strategy does not bundle AI-DLC content.
+> Per [SPEC Appendix B invariant 7](https://github.com/viblocks/viv-typed-agents/blob/main/SPEC.md), agent names are not hardcoded in playbooks. Resolve via routing-table.
+
+## Mid-workflow changes
+
+When workflow changes occur (add/skip stages, restart, scope change), execute [`_common/workflow-changes.md`](_common/workflow-changes.md) first (meta-level), then the SP bindings adjust per [`_common/superpowers-integration.md`](_common/superpowers-integration.md) "Mid-Workflow Changes".
+
+## Skills, agents, hooks references
+
+| Concern | Where it lives |
+|---|---|
+| Knowledge content | [viv-skills](https://github.com/viblocks/viv-skills) |
+| Agent identities | [viv-agents](https://github.com/viblocks/viv-agents) |
+| Routing | [viv-routing](https://github.com/viblocks/viv-routing) |
+| Workflow rules (data) | [viv-workflows](https://github.com/viblocks/viv-workflows) |
+| Structural enforcement | [viv-hooks](https://github.com/viblocks/viv-hooks) |
+
+## Source attribution
+
+Most `_common/` and `ai-dlc/` content was extracted and sanitized from [`fabianyvidal/aidlc-orchestrator`](https://github.com/fabianyvidal/aidlc-orchestrator) per [ADR-RD-011](https://github.com/viblocks/viv-typed-agents/blob/main/architecture/decisions/ADR-RD-011-extend-from-aidlc-orchestrator.md). Stack-prefix agent names and routing-table path adapted to our SOLID architecture.

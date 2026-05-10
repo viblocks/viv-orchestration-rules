@@ -21,11 +21,33 @@ viv-orchestration-rules/
 ├── README.md
 ├── CLAUDE.template.md                    ← project-root CLAUDE.md template
 ├── playbooks/
-│   ├── dispatch-protocol.md              ← typed agent dispatch (the IRON LAW)
-│   ├── post-implementation-chain.md      ← orchestration of chain stages
-│   ├── ai-dlc-integration.md             ← typed agents in AI-DLC stages
-│   ├── superpowers-integration.md        ← typed agents in SP skill bindings
-│   └── issue-driven-flow.md              ← autonomous change flow
+│   ├── dispatch-protocol.md              ← typed agent dispatch entry point
+│   ├── post-implementation-chain.md      ← chain orchestration entry point
+│   ├── ai-dlc-integration.md             ← AI-DLC integration index
+│   ├── superpowers-integration.md        ← SP integration index
+│   ├── issue-driven-flow.md              ← autonomous change flow
+│   ├── _common/                          ← 29 cross-cutting playbooks
+│   │   ├── iron-law.md, typed-agent-mechanism.md, subagent-dispatch-contract.md
+│   │   ├── post-implementation-chain.md, core-change-flow-protocol.md
+│   │   ├── superpowers-integration.md (full bindings ~25KB), sp-precedence.md
+│   │   ├── debugging-gate.md, overconfidence-prevention.md
+│   │   ├── routing-table-population-protocol.md, code-quality-rules.md
+│   │   ├── audit-and-logging.md, friction-reporting.md, session-continuity.md
+│   │   ├── adaptive-execution.md, depth-levels.md, workflow-changes.md
+│   │   ├── stage-structural-patterns.md, frontend-change-discipline.md
+│   │   ├── enforcement-architecture.md, error-handling.md
+│   │   ├── welcome-message.md, terminology.md, question-format-guide.md
+│   │   ├── git-workflow.md, content-validation.md, ascii-diagram-standards.md
+│   │   ├── process-overview.md, aidlc-docs-structure.md
+│   ├── ai-dlc/                           ← per-stage AI-DLC rules (31 files)
+│   │   ├── inception/    (9 stages)
+│   │   ├── construction/ (6 stages)
+│   │   ├── verification/ (8 stages)
+│   │   ├── deployment/   (7 stages)
+│   │   └── operations/   (1 placeholder)
+│   └── extensions/                       ← opt-in extensions
+│       ├── security/baseline/            (security-baseline.md + opt-in.md)
+│       └── testing/property-based/       (property-based-testing.md + opt-in.md)
 ├── examples/
 │   └── viblocks-style/
 │       └── CLAUDE.example.md             ← concrete example mirroring viblocks-ai (rename to CLAUDE.md when vendoring; .example. suffix avoids hook-protected filename traps)
@@ -39,7 +61,16 @@ viv-orchestration-rules/
     └── preservation-audit.md
 ```
 
-## Five playbooks
+## Source attribution
+
+The `_common/` and `ai-dlc/` content was extracted and sanitized from [`fabianyvidal/aidlc-orchestrator`](https://github.com/fabianyvidal/aidlc-orchestrator) per [ADR-RD-011](https://github.com/viblocks/viv-typed-agents/blob/main/architecture/decisions/ADR-RD-011-extend-from-aidlc-orchestrator.md) and local [ADR-004](architecture/decisions/ADR-004-extend-from-aidlc-orchestrator.md). Sanitization was mechanical and repo-wide:
+
+- Stack-prefix agent renames (`nestjs-*`/`reactjs-*` → `backend-*`/`frontend-*` per viv-routing ADR-003)
+- Routing path standardization (`.claude/context/routing-table.json` → `.claude/routing/routing-table.json`)
+- Link path normalization to the new structure
+- Architecture notes inserted where the eliminated `artifact-classifier.json` is referenced
+
+## Five entry-point playbooks
 
 This repo IS the Tier 5 component (per [composition/tiers.md](https://github.com/viblocks/viv-typed-agents/blob/main/composition/tiers.md)). Adopting it means you're at T5 by definition. The "Minimum dependencies" column lists the other components each playbook **assumes** the consumer has already vendored.
 
