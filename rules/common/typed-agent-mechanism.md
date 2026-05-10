@@ -382,5 +382,5 @@ The 4 paths reuse the same routing table (§4) and Post-Implementation Chain (§
 
 ### Reference
 
-- Agnostic strategy: `common/core-change-flow-protocol.md`
+- Agnostic strategy: [`common/core-change-flow-protocol.md` (in aidlc-orchestrator)](https://github.com/viblocks/aidlc-orchestrator/blob/main/rules/common/core-change-flow-protocol.md)
 - Full typed-agent mechanism doc: this file (`common/typed-agent-mechanism.md`)

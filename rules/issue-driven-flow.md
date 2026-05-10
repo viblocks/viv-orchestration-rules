@@ -141,9 +141,9 @@ This page is the **autonomous flow entry point**. The comprehensive treatment li
 
 | Topic | Reference |
 |---|---|
-| Core change flow protocol (DIRECT/CROSS-DOMAIN/DESIGN/REVERT detail) | [`common/core-change-flow-protocol.md`](common/core-change-flow-protocol.md) |
-| Issue analysis discipline (Phase 1 + Phase 2 with fast-pass) | [`common/overconfidence-prevention.md`](common/overconfidence-prevention.md) |
+| Core change flow protocol (DIRECT/CROSS-DOMAIN/DESIGN/REVERT detail) | [`common/core-change-flow-protocol.md`](https://github.com/viblocks/aidlc-orchestrator/blob/main/rules/common/core-change-flow-protocol.md) |
+| Issue analysis discipline (Phase 1 + Phase 2 with fast-pass) | [`common/overconfidence-prevention.md`](https://github.com/viblocks/aidlc-orchestrator/blob/main/rules/common/overconfidence-prevention.md) |
 | Debugging gate (Root cause: contract for fix-intent) | [`common/debugging-gate.md`](common/debugging-gate.md) |
-| Audit-and-logging (issue close evidence schema) | [`common/audit-and-logging.md`](common/audit-and-logging.md) |
-| Friction reporting (when issues block, where to file) | [`common/friction-reporting.md`](common/friction-reporting.md) |
+| Audit-and-logging (issue close evidence schema) | [`common/audit-and-logging.md`](https://github.com/viblocks/aidlc-orchestrator/blob/main/rules/common/audit-and-logging.md) |
+| Friction reporting (when issues block, where to file) | [`common/friction-reporting.md`](https://github.com/viblocks/aidlc-orchestrator/blob/main/rules/common/friction-reporting.md) |
 | Routing table population (when an issue references new paths) | [`common/routing-table-population-protocol.md`](common/routing-table-population-protocol.md) |

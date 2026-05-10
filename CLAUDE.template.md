@@ -118,29 +118,31 @@ If your project does not adopt `viv-hooks`, the IRON LAW is **advisory** — the
 
 ## Playbook depth available
 
-The full orchestration content (per [ADR-RD-011](https://github.com/viblocks/viv-typed-agents/blob/main/architecture/decisions/ADR-RD-011-extend-from-aidlc-orchestrator.md)) is organized as:
+This repo (per [ADR-RD-012](https://github.com/viblocks/viv-typed-agents/blob/main/architecture/decisions/ADR-RD-012-separate-aidlc-orchestrator.md)) is the typed-agents-core orchestration:
 
 ```
 rules/
-├── <5 entry-point summaries>
-├── common/         29 cross-cutting rules
-│                   (iron-law, typed-agent-mechanism, debugging-gate,
-│                    overconfidence-prevention, code-quality-rules,
-│                    routing-table-population-protocol, audit-and-logging,
-│                    friction-reporting, stage-structural-patterns,
-│                    adaptive-execution, depth-levels, workflow-changes,
-│                    frontend-change-discipline, full SP integration,
-│                    welcome-message, terminology, ...)
-├── ai-dlc/         per-stage AI-DLC rules (31 files across 5 phases)
-│   ├── inception/    9 stages
-│   ├── construction/ 6 stages
-│   ├── verification/ 8 stages
-│   ├── deployment/   7 stages
-│   └── operations/   1 placeholder
-└── extensions/     opt-in extensions (security baseline, property-based testing)
+├── <5 entry-point summaries: dispatch-protocol, post-impl-chain,
+│                              ai-dlc-integration (pointer),
+│                              superpowers-integration (typed-agents-only),
+│                              issue-driven-flow>
+└── common/         9 typed-agents-core rules
+                    (iron-law, typed-agent-mechanism, subagent-dispatch-contract,
+                     post-implementation-chain, routing-table-population-protocol,
+                     code-quality-rules, debugging-gate, enforcement-architecture,
+                     git-workflow)
 ```
 
-When working in an AI-DLC stage, read the corresponding `rules/ai-dlc/<phase>/<stage>.md`. When invoking a cross-cutting discipline (debugging, issue analysis, friction reporting), read the corresponding `rules/common/<topic>.md`.
+When invoking the typed-agent dispatch or chain, read the corresponding rule. The 5 entry points have "Foundations" sections cross-linking to the common/ rules.
+
+For AI-DLC SDLC workflow (Inception → Construction → Verification → Deployment), see the separate **AI-DLC orchestrator** product:
+
+- [`viblocks/aidlc-orchestrator`](https://github.com/viblocks/aidlc-orchestrator) — depends on this typed-agents network (DIP)
+- Per-stage rules in `rules/ai-dlc/<phase>/<stage>.md`
+- Cross-cutting AI-DLC disciplines in `rules/common/` (issue-analysis, overconfidence-prevention, friction-reporting, audit-and-logging, etc.)
+- Comprehensive SP per-stage bindings in [`rules/common/superpowers-integration.md` (in aidlc-orchestrator)](https://github.com/viblocks/aidlc-orchestrator/blob/main/rules/common/superpowers-integration.md)
+
+If your project does not adopt AI-DLC, skip the aidlc-orchestrator product and stay with this typed-agents network.
 
 ---
 

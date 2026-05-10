@@ -20,7 +20,7 @@ git log $(git merge-base HEAD main)...HEAD --format="%H %s"
 - **Commits duplicados (mismo SHA en PR abierto)** → STOP. Referenciar PR existente, no crear PR nuevo.
 - **Sin overlap** → continuar con `gh pr create`.
 
-Detalle completo: `common/core-change-flow-protocol.md` step 4.5 (DIRECT/REVERT) y step 7.5 (DESIGN).
+Detalle completo: [`common/core-change-flow-protocol.md` (in aidlc-orchestrator)](https://github.com/viblocks/aidlc-orchestrator/blob/main/rules/common/core-change-flow-protocol.md) step 4.5 (DIRECT/REVERT) y step 7.5 (DESIGN).
 
 ### Commit Policy
 

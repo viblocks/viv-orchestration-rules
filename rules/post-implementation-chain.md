@@ -107,7 +107,7 @@ This page is the **orchestration entry point**. The comprehensive treatment live
 |---|---|
 | Chain rule definition (consumed by hooks) | [`common/post-implementation-chain.md`](common/post-implementation-chain.md) |
 | Enforcement architecture (5 layers) | [`common/enforcement-architecture.md`](common/enforcement-architecture.md) |
-| Audit-and-logging discipline | [`common/audit-and-logging.md`](common/audit-and-logging.md) |
+| Audit-and-logging discipline | [`common/audit-and-logging.md`](https://github.com/viblocks/aidlc-orchestrator/blob/main/rules/common/audit-and-logging.md) |
 | Git workflow (commit conventions) | [`common/git-workflow.md`](common/git-workflow.md) |
 | Debugging gate (Root cause: contract) | [`common/debugging-gate.md`](common/debugging-gate.md) |
-| Verification-before-completion (SP integration) | [`common/superpowers-integration.md`](common/superpowers-integration.md) |
+| Verification-before-completion (SP integration) | [`common/superpowers-integration.md`](https://github.com/viblocks/aidlc-orchestrator/blob/main/rules/common/superpowers-integration.md) |

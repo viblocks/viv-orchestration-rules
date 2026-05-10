@@ -2,7 +2,7 @@
 
 How **typed agents** specialize Superpowers (SP) skill bindings.
 
-> Comprehensive per-stage SP bindings for AI-DLC live in [`viblocks/aidlc-orchestrator`](https://github.com/viblocks/aidlc-orchestrator) `rules/common/superpowers-integration.md`. This page is the typed-agents-only contract.
+> Comprehensive per-stage SP bindings for AI-DLC live in [`viblocks/aidlc-orchestrator`](https://github.com/viblocks/aidlc-orchestrator) [`rules/common/superpowers-integration.md` (in aidlc-orchestrator)](https://github.com/viblocks/aidlc-orchestrator/blob/main/rules/common/superpowers-integration.md). This page is the typed-agents-only contract.
 
 ## The override principle (typed-agents core)
 

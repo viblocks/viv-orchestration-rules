@@ -23,52 +23,47 @@ viv-orchestration-rules/
 ├── rules/
 │   ├── dispatch-protocol.md              ← typed agent dispatch entry point
 │   ├── post-implementation-chain.md      ← chain orchestration entry point
-│   ├── ai-dlc-integration.md             ← AI-DLC integration index
-│   ├── superpowers-integration.md        ← SP integration index
+│   ├── ai-dlc-integration.md             ← thin pointer to viblocks/aidlc-orchestrator
+│   ├── superpowers-integration.md        ← typed-agents-only SP overrides
 │   ├── issue-driven-flow.md              ← autonomous change flow
-│   ├── common/                           ← 29 cross-cutting rules
-│   │   ├── iron-law.md, typed-agent-mechanism.md, subagent-dispatch-contract.md
-│   │   ├── post-implementation-chain.md, core-change-flow-protocol.md
-│   │   ├── superpowers-integration.md (full bindings ~25KB), sp-precedence.md
-│   │   ├── debugging-gate.md, overconfidence-prevention.md
-│   │   ├── routing-table-population-protocol.md, code-quality-rules.md
-│   │   ├── audit-and-logging.md, friction-reporting.md, session-continuity.md
-│   │   ├── adaptive-execution.md, depth-levels.md, workflow-changes.md
-│   │   ├── stage-structural-patterns.md, frontend-change-discipline.md
-│   │   ├── enforcement-architecture.md, error-handling.md
-│   │   ├── welcome-message.md, terminology.md, question-format-guide.md
-│   │   ├── git-workflow.md, content-validation.md, ascii-diagram-standards.md
-│   │   ├── process-overview.md, aidlc-docs-structure.md
-│   ├── ai-dlc/                           ← per-stage AI-DLC rules (31 files)
-│   │   ├── inception/    (9 stages)
-│   │   ├── construction/ (6 stages)
-│   │   ├── verification/ (8 stages)
-│   │   ├── deployment/   (7 stages)
-│   │   └── operations/   (1 placeholder)
-│   └── extensions/                       ← opt-in extensions
-│       ├── security/baseline/            (security-baseline.md + opt-in.md)
-│       └── testing/property-based/       (property-based-testing.md + opt-in.md)
+│   └── common/                           ← 9 typed-agents-core rules
+│       ├── iron-law.md
+│       ├── typed-agent-mechanism.md
+│       ├── subagent-dispatch-contract.md
+│       ├── post-implementation-chain.md
+│       ├── routing-table-population-protocol.md
+│       ├── code-quality-rules.md
+│       ├── debugging-gate.md
+│       ├── enforcement-architecture.md
+│       └── git-workflow.md
 ├── examples/
 │   └── viblocks-style/
-│       └── CLAUDE.example.md             ← concrete example mirroring viblocks-ai (rename to CLAUDE.md when vendoring; .example. suffix avoids hook-protected filename traps)
+│       └── CLAUDE.example.md             ← concrete example mirroring viblocks-ai
 ├── architecture/
 │   └── decisions/
 │       ├── ADR-001-template-not-prescription.md
 │       ├── ADR-002-external-deps-referenced.md
-│       └── ADR-003-iron-law-as-prose.md
+│       ├── ADR-003-iron-law-as-prose.md
+│       └── ADR-004-extend-from-aidlc-orchestrator.md
 └── migration/
     ├── from-viblocks.md
     └── preservation-audit.md
 ```
 
+> **Note (post-split):** earlier versions of this repo also hosted AI-DLC orchestration content. Per [ADR-RD-012](https://github.com/viblocks/viv-typed-agents/blob/main/architecture/decisions/ADR-RD-012-separate-aidlc-orchestrator.md) (which supersedes ADR-RD-011), that content was split into a separate repo [`viblocks/aidlc-orchestrator`](https://github.com/viblocks/aidlc-orchestrator) which depends on this one (DIP). This repo is now strictly the typed-agents-core orchestration: ~14 rule files instead of ~69.
+
+## Companion product
+
+| Repo | Role | Dependency |
+|---|---|---|
+| [viblocks/viv-typed-agents](https://github.com/viblocks/viv-typed-agents) (this network) | Typed-agents dispatch + quality enforcement (Tier 1-5) | (root) |
+| [viblocks/aidlc-orchestrator](https://github.com/viblocks/aidlc-orchestrator) | AI-DLC SDLC orchestrator (Inception → Construction → Verification → Deployment) | depends on viv-typed-agents (DIP) |
+
+The typed-agents network is **independently usable**; AI-DLC requires it as backbone.
+
 ## Source attribution
 
-The `common/` and `ai-dlc/` content was extracted and sanitized from [`fabianyvidal/aidlc-orchestrator`](https://github.com/fabianyvidal/aidlc-orchestrator) per [ADR-RD-011](https://github.com/viblocks/viv-typed-agents/blob/main/architecture/decisions/ADR-RD-011-extend-from-aidlc-orchestrator.md) and local [ADR-004](architecture/decisions/ADR-004-extend-from-aidlc-orchestrator.md). Sanitization was mechanical and repo-wide:
-
-- Stack-prefix agent renames (`nestjs-*`/`reactjs-*` → `backend-*`/`frontend-*` per viv-routing ADR-003)
-- Routing path standardization (`.claude/context/routing-table.json` → `.claude/routing/routing-table.json`)
-- Link path normalization to the new structure
-- Architecture notes inserted where the eliminated `artifact-classifier.json` is referenced
+The 9 `rules/common/` files plus the 5 entry points were SOLID-redesigned for this network. AI-DLC content originally extracted from [`fabianyvidal/aidlc-orchestrator`](https://github.com/fabianyvidal/aidlc-orchestrator) was split out per ADR-RD-012 to `viblocks/aidlc-orchestrator`. See migration history in commit log + ADR-RD-011 (superseded) for the prior full-merge state.
 
 ## Five entry-point playbooks
 
