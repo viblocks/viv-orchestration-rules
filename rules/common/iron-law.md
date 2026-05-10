@@ -1,6 +1,3 @@
-
-> **Architecture note (per [ADR-RD-004](https://github.com/viblocks/viv-typed-agents/blob/main/architecture/decisions/ADR-RD-004-classifier-folded.md)):** the legacy `.claude/context/artifact-classifier.json` no longer exists. Class A scope is derived from `routing-table.json` routes where `enforced: true`. Where this document references the classifier as a separate file, read it as `routing-table.json` with the `enforced` field.
-
 ## IRON LAW: Typed Agent Dispatch
 
 **Toda creación, edición, corrección o mejora de código de aplicación se ejecuta EXCLUSIVAMENTE a través del typed agent correcto. Sin excepciones.**
@@ -9,9 +6,9 @@ La estrategia completa está en `common/typed-agent-mechanism.md`.
 
 ### Routing Table
 
-**Fuente de verdad unica**: `.claude/routing/routing-table.json` — contiene domain, paths, implementer, reviewer para cada dominio.
+**Fuente de verdad unica**: `.claude/routing/routing-table.json` — contiene domain, paths, implementer, reviewer y `enforced` field para cada dominio.
 
-**Classifier PF21** (v3): `.claude/context/artifact-classifier.json` define la taxonomía binaria Clase A (enforcement aplica) vs Clase B (free edit). Todo flujo (F1-F4) respeta esta taxonomía — no hay carveouts.
+**Class A taxonomy**: cada route con `enforced: true` define el scope de Class A (enforcement aplica). Class B (free edit) son los paths sin match o con `enforced: false`. Cualquier flujo de cambio (orquestadores externos, ad-hoc dev) respeta esta taxonomía — no hay carveouts. Per [ADR-RD-004](https://github.com/viblocks/viv-typed-agents/blob/main/architecture/decisions/ADR-RD-004-classifier-folded.md), la taxonomía está embebida en el routing-table — no hay archivo classifier separado.
 
 El **spec reviewer** siempre es `general-purpose` — solo lee código, no necesita domain knowledge.
 

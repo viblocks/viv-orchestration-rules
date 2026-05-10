@@ -1,14 +1,14 @@
 # Subagent Dispatch Contract
 
-**Purpose**: Formal contract for every Agent() call during AI-DLC workflow stages that creates or modifies a code artifact. Ensures consistent typed agent dispatch, chain enforcement, and observable evidence — the same formalism as the issue-driven change flow.
+**Purpose**: Formal contract for every `Agent()` call that creates or modifies a code artifact. Ensures consistent typed agent dispatch, chain enforcement, and observable evidence. This is a **typed-agents-core** contract — it applies whenever a typed agent is dispatched, regardless of which orchestrator (if any) initiated the dispatch.
 
-**Loaded by**: [`common/superpowers-integration.md` (in aidlc-orchestrator)](https://github.com/viblocks/aidlc-orchestrator/blob/main/rules/common/superpowers-integration.md) global rule. Do not load independently.
+**Consumed by**: any orchestrator that delegates codegen to typed agents. Examples: ad-hoc development, the autonomous issue-driven change flow ([`rules/issue-driven-flow.md`](../issue-driven-flow.md)), and external SDLC orchestrators (e.g. AI-DLC at [viblocks/aidlc-orchestrator](https://github.com/viblocks/aidlc-orchestrator) which references this file from its per-stage rules).
 
 ---
 
 ## Core Rule
 
-**Every creation or modification of a code artifact during AI-DLC workflow stages MUST be executed by a subagent — never inline by the main session.**
+**Every creation or modification of a code artifact via subagent dispatch MUST follow this contract — never inline by the main session.**
 
 The main session orchestrates only:
 1. Generates the `[DISPATCH CONTRACT]` just-in-time before each dispatch
@@ -33,7 +33,7 @@ The dispatch contract is required when an `Agent()` call will create or modify a
 
 **Boundary rule**: Does a machine execute/interpret it? → contract required. Does a human read it? → no contract.
 
-Artifacts that do NOT trigger the contract: `aidlc-docs/**/*.md`, `docs/**/*.md`, spec files, plan files, the dispatch contract itself.
+Artifacts that do NOT trigger the contract: any consumer-defined documentation paths (`docs/**/*.md`, project-specific orchestrator artifact paths like `<orchestrator>-docs/**/*.md`, spec files, plan files, the dispatch contract itself). Class B paths in the consumer's `routing-table.json` (`enforced: false`) also do not trigger the contract.
 
 **Precondition**: A dispatch contract can only be generated when the file paths of the task are known. If paths are unknown, the task is not ready to dispatch — complete analysis/planning first.
 
