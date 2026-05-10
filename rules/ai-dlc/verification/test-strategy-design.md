@@ -56,7 +56,7 @@ Present boundary map summary to the user, then generate clarifying questions.
 - **Time and resource constraints** — Is there a deadline or budget that should influence prioritization? Should the strategy optimize for speed (test critical paths only) or thoroughness?
 - **CI/automation philosophy** — Gate by coverage %? Which test levels run on PR vs main? (This answer feeds Stage 7 — CI Pipeline Implementation — directly)
 
-**Question format** (per `_common/question-format-guide.md`):
+**Question format** (per `common/question-format-guide.md`):
 - NEVER ask questions in chat — save to .md file
 - Multiple choice: A, B, C options + X) Other (MANDATORY as last option)
 - [Answer]: tag after each question

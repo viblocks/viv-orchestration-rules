@@ -6,19 +6,19 @@ What was extracted into viv-orchestration-rules vs. what stayed behind in vibloc
 
 | Content | Source | Where it lives now |
 |---|---|---|
-| IRON LAW dispatch protocol | viblocks `CLAUDE.md` "IRON LAW: Typed Agent Dispatch" | `CLAUDE.template.md` + `playbooks/dispatch-protocol.md` |
-| Routing dispatch rules (1-6) | viblocks `CLAUDE.md` "Reglas de dispatch" | `playbooks/dispatch-protocol.md` step-by-step |
-| Unknown service rule | viblocks `CLAUDE.md` "Unknown service rule" | `playbooks/dispatch-protocol.md` step 3 |
-| Post-Implementation Chain stages | viblocks `CLAUDE.md` "Post-Implementation Chain (MANDATORY)" | `playbooks/post-implementation-chain.md` |
-| Post-Chain Output template | viblocks `CLAUDE.md` "Post-Chain Output (MANDATORY)" | `playbooks/post-implementation-chain.md` + `CLAUDE.template.md` |
-| AI-DLC stage bindings | viblocks `.aidlc-rule-details/common/` content (referenced) | `playbooks/ai-dlc-integration.md` |
-| SP skill invocation override | viblocks `CLAUDE.md` "SP Skill Invocation Override (CRITICAL)" | `playbooks/superpowers-integration.md` |
-| Subagent-driven dev with typed agents | viblocks `CLAUDE.md` "Integración con subagent-driven-development" | `playbooks/superpowers-integration.md` |
-| Issue-Driven flow triage gate (Q1-Q4) | viblocks `CLAUDE.md` + issue-driven-change-flow-design.md | `playbooks/issue-driven-flow.md` |
-| Four flow paths (DIRECT/CROSS-DOMAIN/DESIGN/REVERT) | viblocks `core-change-flow-protocol.md` | `playbooks/issue-driven-flow.md` |
+| IRON LAW dispatch protocol | viblocks `CLAUDE.md` "IRON LAW: Typed Agent Dispatch" | `CLAUDE.template.md` + `rules/dispatch-protocol.md` |
+| Routing dispatch rules (1-6) | viblocks `CLAUDE.md` "Reglas de dispatch" | `rules/dispatch-protocol.md` step-by-step |
+| Unknown service rule | viblocks `CLAUDE.md` "Unknown service rule" | `rules/dispatch-protocol.md` step 3 |
+| Post-Implementation Chain stages | viblocks `CLAUDE.md` "Post-Implementation Chain (MANDATORY)" | `rules/post-implementation-chain.md` |
+| Post-Chain Output template | viblocks `CLAUDE.md` "Post-Chain Output (MANDATORY)" | `rules/post-implementation-chain.md` + `CLAUDE.template.md` |
+| AI-DLC stage bindings | viblocks `.aidlc-rule-details/common/` content (referenced) | `rules/ai-dlc-integration.md` |
+| SP skill invocation override | viblocks `CLAUDE.md` "SP Skill Invocation Override (CRITICAL)" | `rules/superpowers-integration.md` |
+| Subagent-driven dev with typed agents | viblocks `CLAUDE.md` "Integración con subagent-driven-development" | `rules/superpowers-integration.md` |
+| Issue-Driven flow triage gate (Q1-Q4) | viblocks `CLAUDE.md` + issue-driven-change-flow-design.md | `rules/issue-driven-flow.md` |
+| Four flow paths (DIRECT/CROSS-DOMAIN/DESIGN/REVERT) | viblocks `core-change-flow-protocol.md` | `rules/issue-driven-flow.md` |
 | Commit policy + push manual | viblocks `CLAUDE.md` "Commit Policy" | `CLAUDE.template.md` "Commit Policy" |
 | PR Overlap Check | viblocks `CLAUDE.md` "PR Overlap Check (MANDATORY...)" | `CLAUDE.template.md` "PR Overlap Check" |
-| Behavioral hierarchy | viblocks `CLAUDE.md` (implicit + SP override section) | `playbooks/superpowers-integration.md` table |
+| Behavioral hierarchy | viblocks `CLAUDE.md` (implicit + SP override section) | `rules/superpowers-integration.md` table |
 
 ## Stayed behind (viblocks-ai-specific)
 
@@ -61,12 +61,12 @@ Reproduce viblocks-ai's behavior using viv-orchestration-rules:
 
 | viblocks-ai behavior | viv-orchestration-rules equivalent |
 |---|---|
-| User says "fix VI-42" → triage Q1-Q4 → DIRECT path | `playbooks/issue-driven-flow.md` triage + DIRECT |
-| User says "implement feature X" in services/core → backend-crypto-implementer | `playbooks/dispatch-protocol.md` steps 1-7 |
-| Implementer completes → verification → reviewer → security (conditional) → commit | `playbooks/post-implementation-chain.md` stage execution |
-| AI-DLC active + Code Generation stage → typed implementer (not general-purpose) | `playbooks/ai-dlc-integration.md` Construction section |
-| SP `subagent-driven-development` invoked → typed agents replace generic agents | `playbooks/superpowers-integration.md` "Subagent-driven development with typed agents" |
-| User adds scope mid-flow → escalate, re-enter triage | `playbooks/issue-driven-flow.md` "Failure modes" |
+| User says "fix VI-42" → triage Q1-Q4 → DIRECT path | `rules/issue-driven-flow.md` triage + DIRECT |
+| User says "implement feature X" in services/core → backend-crypto-implementer | `rules/dispatch-protocol.md` steps 1-7 |
+| Implementer completes → verification → reviewer → security (conditional) → commit | `rules/post-implementation-chain.md` stage execution |
+| AI-DLC active + Code Generation stage → typed implementer (not general-purpose) | `rules/ai-dlc-integration.md` Construction section |
+| SP `subagent-driven-development` invoked → typed agents replace generic agents | `rules/superpowers-integration.md` "Subagent-driven development with typed agents" |
+| User adds scope mid-flow → escalate, re-enter triage | `rules/issue-driven-flow.md` "Failure modes" |
 
 All viblocks orchestration behaviors representable. No behavioral coverage loss.
 
@@ -79,6 +79,6 @@ All viblocks orchestration behaviors representable. No behavioral coverage loss.
 A second review aligned this repo against the SPEC (Goals §1.1, ADR Index §5, Inter-Component Contracts §6, Composition Tiers §7, External Dependencies §8, Apéndice B invariants). Findings and resolutions:
 
 - **MED-1 (resolved):** README "Five playbooks" tier table conflated two semantics. Per `composition/tiers.md`, this repo IS the T5 component. The table now reads "Minimum dependencies" (other components the playbook assumes), not "Required tier". Clarification added that without T3 dependencies, the playbooks are not meaningfully executable.
-- **LOW-1 (resolved):** `playbooks/ai-dlc-integration.md` hardcoded `infra-devops-implementer` agent name in three places, violating SPEC Apéndice B invariant 7. Replaced with "the typed implementer for the `infra-devops` domain (per `routing-table.json`)" abstraction.
-- **LOW-2 (resolved):** `playbooks/superpowers-integration.md` skill bindings table omitted `receiving-code-review` (listed in SPEC §8.2). Added with the "active during implementer re-dispatch loop" semantic. `brainstorming` retained but explicitly marked as not part of SPEC §8.2 contract.
+- **LOW-1 (resolved):** `rules/ai-dlc-integration.md` hardcoded `infra-devops-implementer` agent name in three places, violating SPEC Apéndice B invariant 7. Replaced with "the typed implementer for the `infra-devops` domain (per `routing-table.json`)" abstraction.
+- **LOW-2 (resolved):** `rules/superpowers-integration.md` skill bindings table omitted `receiving-code-review` (listed in SPEC §8.2). Added with the "active during implementer re-dispatch loop" semantic. `brainstorming` retained but explicitly marked as not part of SPEC §8.2 contract.
 - **LOW-3 (resolved):** `CLAUDE.template.md` "Enforcement is structural" section did not introduce the four hook types from ADR-RD-006. Added a brief enumeration table (deny / advisory / refinement / lifecycle) so consumers reading the template understand what the hooks layer provides.

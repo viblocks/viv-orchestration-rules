@@ -99,9 +99,9 @@ Workspace analysis findings:
 ## Step 6: Plugin Auto-Bootstrap of `aidlc-docs/` (CONDITIONAL)
 
 **Trigger condition** — execute ONLY if:
-1. The `aidlc-orchestrator` plugin is detected: `playbooks/` symlink exists in the workspace root (created by the Setup hook when the plugin is installed)
+1. The `aidlc-orchestrator` plugin is detected: `rules/` symlink exists in the workspace root (created by the Setup hook when the plugin is installed)
 
-**Skip condition** — skip if `playbooks/` does not exist.
+**Skip condition** — skip if `rules/` does not exist.
 
 **Purpose**: ensure the workflow can progress regardless of brownfield/greenfield. Applies to BOTH project types — brownfield repos benefit from the same scaffolding once Reverse Engineering is about to write artifacts under `aidlc-docs/inception/`.
 

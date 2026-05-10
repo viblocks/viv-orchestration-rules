@@ -297,7 +297,7 @@ Dispatching a typed implementer = TDD guaranteed, no additional instruction need
 
 ### Post-Implementation Chain — MANDATORY
 
-After any typed implementer completes, see `_common/post-implementation-chain.md`.
+After any typed implementer completes, see `common/post-implementation-chain.md`.
 
 ---
 
@@ -378,9 +378,9 @@ The change flow is a parallel operating mode alongside greenfield for reactive c
 Issue arrives → Triage gate (4 questions) → Path selection → Typed agent dispatch
 ```
 
-The 4 paths reuse the same routing table (§4) and Post-Implementation Chain (§5 / `_common/post-implementation-chain.md`). No new agents or patterns are needed.
+The 4 paths reuse the same routing table (§4) and Post-Implementation Chain (§5 / `common/post-implementation-chain.md`). No new agents or patterns are needed.
 
 ### Reference
 
-- Agnostic strategy: `_common/core-change-flow-protocol.md`
-- Full typed-agent mechanism doc: this file (`_common/typed-agent-mechanism.md`)
+- Agnostic strategy: `common/core-change-flow-protocol.md`
+- Full typed-agent mechanism doc: this file (`common/typed-agent-mechanism.md`)

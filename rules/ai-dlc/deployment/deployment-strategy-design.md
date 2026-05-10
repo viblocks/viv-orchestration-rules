@@ -107,7 +107,7 @@ Categories (minimum 5, maximum 8):
 5. **Release cadence expected** — on-merge, on-tag, scheduled, manual
 6. **Extensions active** — security-baseline, compliance, etc.
 
-Question file format per `_common/question-format-guide.md`:
+Question file format per `common/question-format-guide.md`:
 - NEVER ask in chat — save to `.md` file
 - Multiple choice A, B, C, D + X) Other (MANDATORY as last option)
 - `[Answer]:` tag after each question
@@ -173,7 +173,7 @@ Wait for explicit user approval. DO NOT PROCEED until confirmed. Record approval
 
 ## Escalation
 
-If the Observability Readiness Input Check blocks the phase, escalate per `_common/error-handling.md` with:
+If the Observability Readiness Input Check blocks the phase, escalate per `common/error-handling.md` with:
 - Which condition failed (a/b/c)
 - Which upstream phase owns the gap
 - Recommended recovery path

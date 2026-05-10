@@ -54,7 +54,7 @@ The implementer's system prompt embeds:
 
 ### 7. Run the Post-Implementation Chain
 
-After the implementer returns, follow `playbooks/post-implementation-chain.md`.
+After the implementer returns, follow `rules/post-implementation-chain.md`.
 
 ### 8. Cross-domain changes
 
@@ -85,13 +85,13 @@ See [ADR-RD-007](https://github.com/viblocks/viv-typed-agents/blob/main/architec
 
 ## Foundations (read for depth)
 
-This page is the **operational entry point**. The comprehensive treatment lives in `_common/`:
+This page is the **operational entry point**. The comprehensive treatment lives in `common/`:
 
 | Topic | Reference |
 |---|---|
-| IRON LAW formal statement | [`_common/iron-law.md`](_common/iron-law.md) |
-| Typed agent mechanism (full mechanics) | [`_common/typed-agent-mechanism.md`](_common/typed-agent-mechanism.md) |
-| Subagent dispatch contract | [`_common/subagent-dispatch-contract.md`](_common/subagent-dispatch-contract.md) |
-| Routing table population (new domains) | [`_common/routing-table-population-protocol.md`](_common/routing-table-population-protocol.md) |
-| L5 debugging gate (Root cause: contract) | [`_common/debugging-gate.md`](_common/debugging-gate.md) |
-| Code quality (SOLID enforcement) | [`_common/code-quality-rules.md`](_common/code-quality-rules.md) |
+| IRON LAW formal statement | [`common/iron-law.md`](common/iron-law.md) |
+| Typed agent mechanism (full mechanics) | [`common/typed-agent-mechanism.md`](common/typed-agent-mechanism.md) |
+| Subagent dispatch contract | [`common/subagent-dispatch-contract.md`](common/subagent-dispatch-contract.md) |
+| Routing table population (new domains) | [`common/routing-table-population-protocol.md`](common/routing-table-population-protocol.md) |
+| L5 debugging gate (Root cause: contract) | [`common/debugging-gate.md`](common/debugging-gate.md) |
+| Code quality (SOLID enforcement) | [`common/code-quality-rules.md`](common/code-quality-rules.md) |

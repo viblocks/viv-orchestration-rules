@@ -2,7 +2,7 @@
 
 Construction phases MUST use standardized 2-option completion messages as defined in their respective rule files. DO NOT create 3-option menus or other emergent navigation patterns.
 
-Full rule + defined exceptions: `_common/stage-structural-patterns.md` (Anti-pattern section).
+Full rule + defined exceptions: `common/stage-structural-patterns.md` (Anti-pattern section).
 
 ---
 
@@ -17,18 +17,18 @@ The AI model intelligently assesses what stages are needed based on:
 
 ## MANDATORY: Rule Details Loading
 **CRITICAL**: When performing any phase, you MUST read and use relevant content from rule detail files. Check these paths in order and use the first one that exists:
-- `playbooks/` (Cursor, Cline, Claude Code, GitHub Copilot)
+- `rules/` (Cursor, Cline, Claude Code, GitHub Copilot)
 - `.kiro/aws-aidlc-rule-details/` (Kiro IDE and CLI)
 - `.amazonq/aws-aidlc-rule-details/` (Amazon Q Developer)
 
-All subsequent rule detail file references (e.g., `_common/process-overview.md`, `ai-dlc/inception/workspace-detection.md`) are relative to whichever rule details directory was resolved above.
+All subsequent rule detail file references (e.g., `common/process-overview.md`, `ai-dlc/inception/workspace-detection.md`) are relative to whichever rule details directory was resolved above.
 
 **Common Rules**: ALWAYS load common rules at workflow start:
-- Load `_common/process-overview.md` for workflow overview
-- Load `_common/session-continuity.md` for session resumption guidance
-- Load `_common/content-validation.md` for content validation requirements
-- Load `_common/question-format-guide.md` for question formatting rules
-- Load `_common/superpowers-integration.md` for SP skill-to-stage bindings (full workflow: greenfield and brownfield)
+- Load `common/process-overview.md` for workflow overview
+- Load `common/session-continuity.md` for session resumption guidance
+- Load `common/content-validation.md` for content validation requirements
+- Load `common/question-format-guide.md` for question formatting rules
+- Load `common/superpowers-integration.md` for SP skill-to-stage bindings (full workflow: greenfield and brownfield)
 - Reference these throughout the workflow execution
 - **After loading all common rules**, display this activation banner BEFORE the welcome message:
 

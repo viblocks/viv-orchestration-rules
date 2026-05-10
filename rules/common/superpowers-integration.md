@@ -43,7 +43,7 @@ Estos skills son non-negotiable en toda sesión de construcción. No hay excepci
 
 Every `Agent()` call that creates or modifies a code artifact MUST include a `[DISPATCH CONTRACT]` section at the start of the prompt, generated just-in-time before calling each Agent. The main session orchestrates (generate contract → dispatch → verify evidence) and never directly edits code artifacts.
 
-**Full spec**: `_common/subagent-dispatch-contract.md` — contract template, code artifact taxonomy, JIT generation steps, evidence verification rules.
+**Full spec**: `common/subagent-dispatch-contract.md` — contract template, code artifact taxonomy, JIT generation steps, evidence verification rules.
 
 ---
 
@@ -90,7 +90,7 @@ After RE completes and before Requirements Analysis, if the routing table in CLA
 4. Services marked "Unmatched" (no typed agent for their stack) → resolved in Workflow Planning with user decision: create new typed agent, use general-purpose, or defer
 5. User approves as part of RE approval gate (no additional gate)
 
-See `_common/routing-table-population-protocol.md` for full spec.
+See `common/routing-table-population-protocol.md` for full spec.
 
 ### Application Design
 - **`brainstorming`** — CONDITIONAL: architectural decision with multiple viable approaches (components, services, integration patterns). Output: `aidlc-docs/inception/application-design/brainstorming-spec.md`
@@ -123,7 +123,7 @@ See `_common/routing-table-population-protocol.md` for full spec.
 
 ### Code Generation Part 1 — Planning (MANDATORY)
 - **`writing-plans`** — MANDATORY: produces the bite-sized TDD plan from FD + NFR + Infra.
-- **Routing Table Population** — If the plan includes paths in `services/*` or `packages/*` without a row in the routing table, the plan MUST include **Step 0: update routing table** before any typed agent dispatch. Classify domain from NFR/Infra artifacts, add row to `.claude/routing/routing-table.json`. User approves as part of the plan approval gate. See `_common/routing-table-population-protocol.md`.
+- **Routing Table Population** — If the plan includes paths in `services/*` or `packages/*` without a row in the routing table, the plan MUST include **Step 0: update routing table** before any typed agent dispatch. Classify domain from NFR/Infra artifacts, add row to `.claude/routing/routing-table.json`. User approves as part of the plan approval gate. See `common/routing-table-population-protocol.md`.
 - **`verification-before-completion`** — IRON LAW: before the AI-DLC approval gate.
 
 ### Code Generation Part 2 — Execution (MANDATORY)
@@ -334,7 +334,7 @@ If an extension introduces requirements that cannot be satisfied by existing typ
 
 ## Mid-Workflow Changes — SP Integration
 
-When a mid-workflow change occurs, AI-DLC executes the protocol in `_common/workflow-changes.md` (archive, update state, adjust plan). **After AI-DLC resolves the meta-level**, apply the SP rules below to adjust skill invocations.
+When a mid-workflow change occurs, AI-DLC executes the protocol in `common/workflow-changes.md` (archive, update state, adjust plan). **After AI-DLC resolves the meta-level**, apply the SP rules below to adjust skill invocations.
 
 ### 1. Adding a Skipped Stage
 

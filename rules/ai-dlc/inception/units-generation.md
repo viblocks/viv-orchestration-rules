@@ -173,11 +173,11 @@ If the analysis in step 7 reveals ANY ambiguous answers, you MUST:
 ## Step 20: Plugin Enforcement Bootstrap (MANDATORY POST-COMPLETION, CONDITIONAL)
 
 **Trigger condition** — execute this step ONLY if BOTH:
-1. The project consumes the `aidlc-orchestrator` plugin: `playbooks/` symlink exists in the project root, AND
+1. The project consumes the `aidlc-orchestrator` plugin: `rules/` symlink exists in the project root, AND
 2. `routing-table.json` has `"domains": []` (Z2 auto-detect state — bootstrap not yet done)
 
 **Skip condition** — skip this step if:
-- `playbooks/` does not exist (project does not use the plugin), OR
+- `rules/` does not exist (project does not use the plugin), OR
 - `routing-table.json` already has populated `domains` (brownfield re-run or prior bootstrap)
 
 **Purpose**: This is the **transition trigger ★** from Phase A → Phase B. Runs `scripts/bootstrap-enforcement.sh` to render typed-agent templates, populate enforcement config, and flip enforcement to hard. Construction MUST NOT begin until this step succeeds.

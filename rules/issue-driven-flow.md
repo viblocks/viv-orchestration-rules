@@ -137,13 +137,13 @@ Without these, the flow degrades to user-supervised execution at every step. Wit
 
 ## Foundations (read for depth)
 
-This page is the **autonomous flow entry point**. The comprehensive treatment lives in `_common/`:
+This page is the **autonomous flow entry point**. The comprehensive treatment lives in `common/`:
 
 | Topic | Reference |
 |---|---|
-| Core change flow protocol (DIRECT/CROSS-DOMAIN/DESIGN/REVERT detail) | [`_common/core-change-flow-protocol.md`](_common/core-change-flow-protocol.md) |
-| Issue analysis discipline (Phase 1 + Phase 2 with fast-pass) | [`_common/overconfidence-prevention.md`](_common/overconfidence-prevention.md) |
-| Debugging gate (Root cause: contract for fix-intent) | [`_common/debugging-gate.md`](_common/debugging-gate.md) |
-| Audit-and-logging (issue close evidence schema) | [`_common/audit-and-logging.md`](_common/audit-and-logging.md) |
-| Friction reporting (when issues block, where to file) | [`_common/friction-reporting.md`](_common/friction-reporting.md) |
-| Routing table population (when an issue references new paths) | [`_common/routing-table-population-protocol.md`](_common/routing-table-population-protocol.md) |
+| Core change flow protocol (DIRECT/CROSS-DOMAIN/DESIGN/REVERT detail) | [`common/core-change-flow-protocol.md`](common/core-change-flow-protocol.md) |
+| Issue analysis discipline (Phase 1 + Phase 2 with fast-pass) | [`common/overconfidence-prevention.md`](common/overconfidence-prevention.md) |
+| Debugging gate (Root cause: contract for fix-intent) | [`common/debugging-gate.md`](common/debugging-gate.md) |
+| Audit-and-logging (issue close evidence schema) | [`common/audit-and-logging.md`](common/audit-and-logging.md) |
+| Friction reporting (when issues block, where to file) | [`common/friction-reporting.md`](common/friction-reporting.md) |
+| Routing table population (when an issue references new paths) | [`common/routing-table-population-protocol.md`](common/routing-table-population-protocol.md) |

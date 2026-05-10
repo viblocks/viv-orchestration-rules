@@ -6,7 +6,7 @@
 
 **Date**: 2026-04-13
 
-**Enforcement context**: This document covers *structural* patterns for defining phases and stages. For *enforcement* mechanisms (SRP hooks, Class A/B artifact classifier, `AIDLC_ENFORCEMENT_MODE`), see `_common/enforcement-architecture.md`.
+**Enforcement context**: This document covers *structural* patterns for defining phases and stages. For *enforcement* mechanisms (SRP hooks, Class A/B artifact classifier, `AIDLC_ENFORCEMENT_MODE`), see `common/enforcement-architecture.md`.
 
 ---
 
@@ -156,7 +156,7 @@ aidlc-docs/
 
 ### 0.5 SP Integration Section
 
-Every phase has its own section in `_common/superpowers-integration.md` defining which SP skills bind to which stages.
+Every phase has its own section in `common/superpowers-integration.md` defining which SP skills bind to which stages.
 
 **Structure:**
 ```markdown
@@ -179,7 +179,7 @@ Every phase has its own section in `_common/superpowers-integration.md` defining
 
 ### 0.6 Session Continuity Entries
 
-Every phase needs entries in `_common/session-continuity.md` defining what artifacts to load when resuming the phase in a new session.
+Every phase needs entries in `common/session-continuity.md` defining what artifacts to load when resuming the phase in a new session.
 
 **Structure:**
 ```markdown
@@ -543,7 +543,7 @@ Step F: Follow-Up Questions (if ambiguities found)
 Step G: Gate → Proceed to artifact generation
 ```
 
-**Question format compliance** (per `_common/question-format-guide.md`):
+**Question format compliance** (per `common/question-format-guide.md`):
 - NEVER ask questions in chat — always in .md files
 - Multiple choice: A, B, C, D options + X) Other (MANDATORY as last option)
 - [Answer]: tag after each question
@@ -680,7 +680,7 @@ Invoke applicable domain skills:
 Integrate recommendations into the [artifact] without duplicating or contradicting prior steps.
 ```
 
-**Binding authority:** `_common/superpowers-integration.md` is the sole authority for which skills bind to which stages. Generic skill triggers are OVERRIDDEN by the bindings.
+**Binding authority:** `common/superpowers-integration.md` is the sole authority for which skills bind to which stages. Generic skill triggers are OVERRIDDEN by the bindings.
 
 **Phase-level structural variant:**
 - **VERIFICATION stages** formalize domain hooks as explicit named steps in their step sequence (e.g., `## Step N: Domain Hook`). This makes the invocation point unambiguous within the rule file.
@@ -696,7 +696,7 @@ Stages that may span multiple sessions must support resumption.
 
 **Resume protocol:**
 1. Read `aidlc-state.md` — determine current stage and progress
-2. Load all previous stage artifacts (per `_common/session-continuity.md`)
+2. Load all previous stage artifacts (per `common/session-continuity.md`)
 3. Load the current stage's plan file — find last completed checkbox
 4. Present "Welcome back" prompt with current status
 5. Log continuity in audit.md
@@ -713,7 +713,7 @@ Stages that may span multiple sessions must support resumption.
 
 Stages that produce Mermaid diagrams, ASCII art, or structured content must validate before writing.
 
-**Per `_common/content-validation.md`:**
+**Per `common/content-validation.md`:**
 - ASCII diagrams: count characters per line, same width, only `+|-|^|v|<|>` and spaces
 - Mermaid diagrams: validate syntax, escape special characters, provide text fallback
 - Embedded code blocks: validate syntax
@@ -721,7 +721,7 @@ Stages that produce Mermaid diagrams, ASCII art, or structured content must vali
 
 **Pattern:**
 ```markdown
-**Output**: [Diagram type] (ASCII or Mermaid — validate syntax per `_common/content-validation.md`).
+**Output**: [Diagram type] (ASCII or Mermaid — validate syntax per `common/content-validation.md`).
 ```
 
 ---
@@ -764,15 +764,15 @@ Use when creating a new AI-DLC phase or auditing an existing one.
 - [ ] **Phase contract** — receives/delivers table in the phase's design spec, deliverables are specific artifacts
 - [ ] **Phase section in aidlc-state.md** — all stages listed with checkboxes, CONDITIONAL stages marked with trigger
 - [ ] **Phase directory** — `aidlc-docs/[phase]/` created with `plans/` subdirectory
-- [ ] **SP integration section** — `_common/superpowers-integration.md` has section with MANDATORY/CONDITIONAL bindings per stage
-- [ ] **Session continuity entries** — `_common/session-continuity.md` lists specific artifacts to load on phase resume
+- [ ] **SP integration section** — `common/superpowers-integration.md` has section with MANDATORY/CONDITIONAL bindings per stage
+- [ ] **Session continuity entries** — `common/session-continuity.md` lists specific artifacts to load on phase resume
 - [ ] **Phase transition — outgoing** — last stage has pre-flight checklist verifying all deliverables exist
 - [ ] **Phase transition — incoming** — first stage loads all prior phase artifacts and creates phase section in aidlc-state.md
-- [ ] **Stage rule files** — every stage has its own rule file in `playbooks/[phase]/`
-- [ ] **Process overview updated** — `_common/process-overview.md` Mermaid diagram and phase descriptions include the new phase
-- [ ] **Welcome message updated** — `_common/welcome-message.md` user-facing phase overview includes the new phase
+- [ ] **Stage rule files** — every stage has its own rule file in `rules/[phase]/`
+- [ ] **Process overview updated** — `common/process-overview.md` Mermaid diagram and phase descriptions include the new phase
+- [ ] **Welcome message updated** — `common/welcome-message.md` user-facing phase overview includes the new phase
 - [ ] **SP Override table updated** — CLAUDE.md "SP Skill Invocation Override" table includes the new phase's mode and authority
-- [ ] **Workflow changes protocol** — `_common/workflow-changes.md` includes scenarios for mid-workflow changes involving the new phase (if applicable)
+- [ ] **Workflow changes protocol** — `common/workflow-changes.md` includes scenarios for mid-workflow changes involving the new phase (if applicable)
 - [ ] **Each stage passes its stage-level checklist** (5.2+)
 
 ### 5.2 Stage-Level Checklists

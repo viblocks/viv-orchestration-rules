@@ -65,7 +65,7 @@ flowchart TD
     ProdSmoke -->|FAIL| AutoRollback[Auto-rollback + FAILED]
 ```
 
-**MANDATORY**: Validate Mermaid syntax per `_common/content-validation.md` before writing.
+**MANDATORY**: Validate Mermaid syntax per `common/content-validation.md` before writing.
 
 ## Step 6: Prod Approval Gate Mechanism
 

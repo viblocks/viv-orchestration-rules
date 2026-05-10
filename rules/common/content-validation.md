@@ -8,7 +8,7 @@
 
 **CRITICAL**: Before creating ANY file with ASCII diagrams:
 
-1. **LOAD** `_common/ascii-diagram-standards.md`
+1. **LOAD** `common/ascii-diagram-standards.md`
 2. **VALIDATE** each diagram:
    - Count characters per line (all lines MUST be same width)
    - Use ONLY: `+` `-` `|` `^` `v` `<` `>` and spaces
@@ -16,7 +16,7 @@
    - Spaces only (NO tabs)
 3. **TEST** alignment by verifying box corners align vertically
 
-**See `_common/ascii-diagram-standards.md` for patterns and validation checklist.**
+**See `common/ascii-diagram-standards.md` for patterns and validation checklist.**
 
 ## Mermaid Diagram Validation
 

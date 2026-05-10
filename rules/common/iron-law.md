@@ -5,7 +5,7 @@
 
 **Toda creación, edición, corrección o mejora de código de aplicación se ejecuta EXCLUSIVAMENTE a través del typed agent correcto. Sin excepciones.**
 
-La estrategia completa está en `_common/typed-agent-mechanism.md`.
+La estrategia completa está en `common/typed-agent-mechanism.md`.
 
 ### Routing Table
 
@@ -15,7 +15,7 @@ La estrategia completa está en `_common/typed-agent-mechanism.md`.
 
 El **spec reviewer** siempre es `general-purpose` — solo lee código, no necesita domain knowledge.
 
-**Unknown service rule**: Cualquier `services/*` o `packages/*` que NO tenga fila explícita en la tabla → **STOP**. No asumir dominio. Ejecutar el Routing Table Population Protocol (ver `_common/routing-table-population-protocol.md`): (1) clasificar el stack desde artifacts de diseño (NFR/Infra) o RE (component-inventory/technology-stack), (2) agregar entrada a `.claude/routing/routing-table.json`, (3) si no existe typed agent para ese stack → escalar al usuario con opciones (crear agent, usar general-purpose, o diferir). Solo entonces despachar al typed agent correcto.
+**Unknown service rule**: Cualquier `services/*` o `packages/*` que NO tenga fila explícita en la tabla → **STOP**. No asumir dominio. Ejecutar el Routing Table Population Protocol (ver `common/routing-table-population-protocol.md`): (1) clasificar el stack desde artifacts de diseño (NFR/Infra) o RE (component-inventory/technology-stack), (2) agregar entrada a `.claude/routing/routing-table.json`, (3) si no existe typed agent para ese stack → escalar al usuario con opciones (crear agent, usar general-purpose, o diferir). Solo entonces despachar al typed agent correcto.
 
 ### Reglas de dispatch
 
@@ -38,4 +38,4 @@ code reviewer  → backend-crypto-reviewer   | frontend-crypto-reviewer
 
 ### Extensibilidad
 
-Para agregar un nuevo dominio: crear los agentes en `.claude/agents/`, crear el skill en `.claude/skills/[domain]/`, agregar la entrada a `.claude/routing/routing-table.json`, y actualizar el hook en `settings.json`. Ver `_common/typed-agent-mechanism.md` sección "Extensibility — Adding a New Domain".
+Para agregar un nuevo dominio: crear los agentes en `.claude/agents/`, crear el skill en `.claude/skills/[domain]/`, agregar la entrada a `.claude/routing/routing-table.json`, y actualizar el hook en `settings.json`. Ver `common/typed-agent-mechanism.md` sección "Extensibility — Adding a New Domain".

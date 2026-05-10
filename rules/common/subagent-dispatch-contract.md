@@ -2,7 +2,7 @@
 
 **Purpose**: Formal contract for every Agent() call during AI-DLC workflow stages that creates or modifies a code artifact. Ensures consistent typed agent dispatch, chain enforcement, and observable evidence — the same formalism as the issue-driven change flow.
 
-**Loaded by**: `_common/superpowers-integration.md` global rule. Do not load independently.
+**Loaded by**: `common/superpowers-integration.md` global rule. Do not load independently.
 
 ---
 

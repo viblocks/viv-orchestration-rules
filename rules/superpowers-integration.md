@@ -8,7 +8,7 @@ How typed agents specialize Superpowers (SP) skill bindings.
 
 The full bindings (~25KB, per-stage SP skill activation rules) live in:
 
-**[`_common/superpowers-integration.md`](_common/superpowers-integration.md)**
+**[`common/superpowers-integration.md`](common/superpowers-integration.md)**
 
 This page is a thin index pointing there. It exists for two reasons:
 1. Quick discovery from the playbook root
@@ -53,8 +53,8 @@ If layer 1 says "skip TDD" and layer 3 says "TDD is mandatory," **layer 1 wins**
 
 For the canonical activation matrix per AI-DLC phase, read:
 
-- [`_common/superpowers-integration.md`](_common/superpowers-integration.md) — full bindings
-- [`_common/sp-precedence.md`](_common/sp-precedence.md) — precedence table
+- [`common/superpowers-integration.md`](common/superpowers-integration.md) — full bindings
+- [`common/sp-precedence.md`](common/sp-precedence.md) — precedence table
 
 ## Subagent-driven development with typed agents
 

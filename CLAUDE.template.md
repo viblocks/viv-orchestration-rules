@@ -16,14 +16,14 @@ The `enforced` field on each route determines Class A (typed-agent dispatch enfo
 
 ### Dispatch rules
 
-1. **Detect domain by path**, not by problem keywords. If the path has no explicit route, **STOP** and apply the unknown-service rule (see `playbooks/dispatch-protocol.md`).
+1. **Detect domain by path**, not by problem keywords. If the path has no explicit route, **STOP** and apply the unknown-service rule (see `rules/dispatch-protocol.md`).
 2. **Use the typed implementer** — never `general-purpose` for Class A code.
 3. **Use the typed reviewer** — never a generic code-reviewer for Class A code.
 4. **TDD is embedded** — don't invoke a separate TDD skill; the typed agent's IRON LAW includes it.
 5. **Cross-domain work** is split per domain in the plan; shared packages are Task 1.
 6. **Project-specific domain skills** — invoke before recommendations or fixes that cross service boundaries in domain-critical pipelines (see `<PROJECT_DOMAIN_SKILL_TRIGGERS>`).
 
-See `playbooks/dispatch-protocol.md` for the full protocol.
+See `rules/dispatch-protocol.md` for the full protocol.
 
 ## Post-Implementation Chain (MANDATORY)
 
@@ -34,7 +34,7 @@ After any typed implementer completes, the chain runs per `.claude/workflows/pos
 3. **Security review** — conditional on path triggers
 4. **Commit** — automatic when all preceding gates pass; push is never automatic
 
-See `playbooks/post-implementation-chain.md` for stage-by-stage orchestration.
+See `rules/post-implementation-chain.md` for stage-by-stage orchestration.
 
 ## Post-Chain Output (MANDATORY)
 
@@ -69,7 +69,7 @@ Sequential workflows only. Concurrent multi-agent coordination is out of scope.
 
 ## Change Flow — Issue-Driven (post-production autonomous)
 
-When the user references an issue (`<ISSUE_PREFIX>-XXX`), execute the issue-driven flow per `playbooks/issue-driven-flow.md`:
+When the user references an issue (`<ISSUE_PREFIX>-XXX`), execute the issue-driven flow per `rules/issue-driven-flow.md`:
 
 1. **Read the issue** from `<ISSUE_TRACKER>`
 2. **Triage** (4 questions: new abstraction? cross-domain? revert? scoped fix?). First match wins.
@@ -80,17 +80,17 @@ Autonomous: DIRECT, REVERT. Supervised: DESIGN, CROSS-DOMAIN.
 
 ## Full Workflow — AI-DLC + Superpowers integration
 
-When executing the full AI-DLC workflow (Inception → Construction → Verification → Deployment), Superpowers skills bind to specific stages per `playbooks/superpowers-integration.md` and `playbooks/ai-dlc-integration.md`.
+When executing the full AI-DLC workflow (Inception → Construction → Verification → Deployment), Superpowers skills bind to specific stages per `rules/superpowers-integration.md` and `rules/ai-dlc-integration.md`.
 
 **Critical override:** during AI-DLC execution, the operative bindings are the **sole authority** for SP skill invocation. Generic SP triggers ("use brainstorming before any creative work") are OVERRIDDEN.
 
 | Mode | Authority for SP invocation |
 |---|---|
-| AI-DLC full workflow | `playbooks/superpowers-integration.md` |
-| AI-DLC change flow | `playbooks/issue-driven-flow.md` |
-| Issue-Driven autonomous | `playbooks/issue-driven-flow.md` |
+| AI-DLC full workflow | `rules/superpowers-integration.md` |
+| AI-DLC change flow | `rules/issue-driven-flow.md` |
+| Issue-Driven autonomous | `rules/issue-driven-flow.md` |
 | Outside AI-DLC + Class B | Default SP behavior |
-| Outside AI-DLC + Class A | `playbooks/dispatch-protocol.md` |
+| Outside AI-DLC + Class A | `rules/dispatch-protocol.md` |
 
 ## Enforcement is structural, not behavioral
 
@@ -121,9 +121,9 @@ If your project does not adopt `viv-hooks`, the IRON LAW is **advisory** — the
 The full orchestration content (per [ADR-RD-011](https://github.com/viblocks/viv-typed-agents/blob/main/architecture/decisions/ADR-RD-011-extend-from-aidlc-orchestrator.md)) is organized as:
 
 ```
-playbooks/
+rules/
 ├── <5 entry-point summaries>
-├── _common/        29 cross-cutting playbooks
+├── common/         29 cross-cutting rules
 │                   (iron-law, typed-agent-mechanism, debugging-gate,
 │                    overconfidence-prevention, code-quality-rules,
 │                    routing-table-population-protocol, audit-and-logging,
@@ -132,15 +132,15 @@ playbooks/
 │                    frontend-change-discipline, full SP integration,
 │                    welcome-message, terminology, ...)
 ├── ai-dlc/         per-stage AI-DLC rules (31 files across 5 phases)
-│   ├── inception/  9 stages
+│   ├── inception/    9 stages
 │   ├── construction/ 6 stages
 │   ├── verification/ 8 stages
-│   ├── deployment/  7 stages
-│   └── operations/  1 placeholder
+│   ├── deployment/   7 stages
+│   └── operations/   1 placeholder
 └── extensions/     opt-in extensions (security baseline, property-based testing)
 ```
 
-When working in an AI-DLC stage, read the corresponding `playbooks/ai-dlc/<phase>/<stage>.md`. When invoking a cross-cutting discipline (debugging, issue analysis, friction reporting), read the corresponding `playbooks/_common/<topic>.md`.
+When working in an AI-DLC stage, read the corresponding `rules/ai-dlc/<phase>/<stage>.md`. When invoking a cross-cutting discipline (debugging, issue analysis, friction reporting), read the corresponding `rules/common/<topic>.md`.
 
 ---
 

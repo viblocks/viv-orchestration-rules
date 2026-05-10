@@ -14,19 +14,21 @@ The user requested 100% extraction of those rules into our network, sanitized to
 
 ## Decision
 
-Extract the full `rules/` tree from aidlc-orchestrator into `viv-orchestration-rules/playbooks/`, sanitized as follows:
+Extract the full `rules/` tree from aidlc-orchestrator into `viv-orchestration-rules/rules/`, sanitized as follows:
+
+> **Naming note (post-extension)**: this repo originally placed extracted content under `playbooks/`. After the extension landed, the directory was renamed to `rules/` to match the upstream source and the actual content (declarative rules, not procedural playbooks). Likewise `_common/` was renamed to `common/` (no underscore prefix). The 5 entry-point summaries (dispatch-protocol, post-implementation-chain, ai-dlc-integration, superpowers-integration, issue-driven-flow) live directly under `rules/` alongside `common/`, `ai-dlc/`, and `extensions/`.
 
 ### Structural mapping
 
 | aidlc-orchestrator path | viv-orchestration-rules path |
 |---|---|
-| `rules/common/` | `playbooks/_common/` |
-| `rules/inception/` | `playbooks/ai-dlc/inception/` |
-| `rules/construction/` | `playbooks/ai-dlc/construction/` |
-| `rules/verification/` | `playbooks/ai-dlc/verification/` |
-| `rules/deployment/` | `playbooks/ai-dlc/deployment/` |
-| `rules/operations/` | `playbooks/ai-dlc/operations/` |
-| `rules/extensions/` | `playbooks/extensions/` |
+| `rules/common/` | `rules/common/` |
+| `rules/inception/` | `rules/ai-dlc/inception/` |
+| `rules/construction/` | `rules/ai-dlc/construction/` |
+| `rules/verification/` | `rules/ai-dlc/verification/` |
+| `rules/deployment/` | `rules/ai-dlc/deployment/` |
+| `rules/operations/` | `rules/ai-dlc/operations/` |
+| `rules/extensions/` | `rules/extensions/` |
 
 ### Sanitizations applied (mechanical, repo-wide)
 
@@ -34,17 +36,17 @@ Extract the full `rules/` tree from aidlc-orchestrator into `viv-orchestration-r
    - `nestjs-*` → `backend-*` (with crypto/waas tier preserved)
    - `reactjs-*` → `frontend-*` (with crypto/waas tier preserved)
 2. **Routing-table path**: `.claude/context/routing-table.json` → `.claude/routing/routing-table.json`
-3. **Markdown link path renames**: `common/X.md`, `inception/X.md`, etc. → corresponding `_common/X.md`, `ai-dlc/inception/X.md`
+3. **Markdown link path renames**: `common/X.md`, `inception/X.md`, etc. → corresponding `common/X.md`, `ai-dlc/inception/X.md`
 4. **Repo identity**: GitHub URLs pointing to `fabianyvidal/aidlc-orchestrator` updated to our repos where ownership applies
 5. **Architecture note auto-insertion**: any file mentioning `.claude/context/artifact-classifier.json` (eliminated per ADR-RD-004) gains a top-of-file note clarifying that Class A scope is now derived from `routing-table.json`
 
 ### Existing playbooks preserved as entry points
 
-The 5 original playbooks (`dispatch-protocol.md`, `post-implementation-chain.md`, `ai-dlc-integration.md`, `superpowers-integration.md`, `issue-driven-flow.md`) remain as **entry-point summaries** linking to the comprehensive `_common/` and `ai-dlc/` content. Specifically:
+The 5 original playbooks (`dispatch-protocol.md`, `post-implementation-chain.md`, `ai-dlc-integration.md`, `superpowers-integration.md`, `issue-driven-flow.md`) remain as **entry-point summaries** linking to the comprehensive `common/` and `ai-dlc/` content. Specifically:
 
 - `ai-dlc-integration.md` → reframed as **index** for the per-phase tree
-- `superpowers-integration.md` → thin pointer to `_common/superpowers-integration.md` (the 25KB canonical version)
-- `dispatch-protocol.md`, `post-implementation-chain.md`, `issue-driven-flow.md` → kept as SOLID-redesigned entry points; cross-link to the comprehensive `_common/` files
+- `superpowers-integration.md` → thin pointer to `common/superpowers-integration.md` (the 25KB canonical version)
+- `dispatch-protocol.md`, `post-implementation-chain.md`, `issue-driven-flow.md` → kept as SOLID-redesigned entry points; cross-link to the comprehensive `common/` files
 
 This avoids replacing our SOLID-redesigned surface while landing the full content depth.
 
@@ -67,9 +69,9 @@ ADR-002 ("external deps referenced not extracted") had stated AI-DLC and Superpo
 
 ### What changes
 
-- `playbooks/` grows from 5 files to 69 files (~25KB → ~580KB)
+- `rules/` grows from 5 files to 69 files (~25KB → ~580KB)
 - Each AI-DLC stage now has its own playbook in `ai-dlc/<phase>/` with depth selection, question generation, approval gate format
-- `_common/` provides 29 cross-cutting playbooks including operational disciplines (issue-analysis, overconfidence, friction, audit-and-logging) absent from viblocks-ai
+- `common/` provides 29 cross-cutting playbooks including operational disciplines (issue-analysis, overconfidence, friction, audit-and-logging) absent from viblocks-ai
 - `extensions/` provides opt-in extensions (security baseline, property-based testing) with `*.opt-in.md` opt-in prompts
 
 ### What does NOT change

@@ -20,13 +20,13 @@ Per [ADR-RD-008](https://github.com/viblocks/viv-typed-agents/blob/main/architec
 viv-orchestration-rules/
 ├── README.md
 ├── CLAUDE.template.md                    ← project-root CLAUDE.md template
-├── playbooks/
+├── rules/
 │   ├── dispatch-protocol.md              ← typed agent dispatch entry point
 │   ├── post-implementation-chain.md      ← chain orchestration entry point
 │   ├── ai-dlc-integration.md             ← AI-DLC integration index
 │   ├── superpowers-integration.md        ← SP integration index
 │   ├── issue-driven-flow.md              ← autonomous change flow
-│   ├── _common/                          ← 29 cross-cutting playbooks
+│   ├── common/                           ← 29 cross-cutting rules
 │   │   ├── iron-law.md, typed-agent-mechanism.md, subagent-dispatch-contract.md
 │   │   ├── post-implementation-chain.md, core-change-flow-protocol.md
 │   │   ├── superpowers-integration.md (full bindings ~25KB), sp-precedence.md
@@ -63,7 +63,7 @@ viv-orchestration-rules/
 
 ## Source attribution
 
-The `_common/` and `ai-dlc/` content was extracted and sanitized from [`fabianyvidal/aidlc-orchestrator`](https://github.com/fabianyvidal/aidlc-orchestrator) per [ADR-RD-011](https://github.com/viblocks/viv-typed-agents/blob/main/architecture/decisions/ADR-RD-011-extend-from-aidlc-orchestrator.md) and local [ADR-004](architecture/decisions/ADR-004-extend-from-aidlc-orchestrator.md). Sanitization was mechanical and repo-wide:
+The `common/` and `ai-dlc/` content was extracted and sanitized from [`fabianyvidal/aidlc-orchestrator`](https://github.com/fabianyvidal/aidlc-orchestrator) per [ADR-RD-011](https://github.com/viblocks/viv-typed-agents/blob/main/architecture/decisions/ADR-RD-011-extend-from-aidlc-orchestrator.md) and local [ADR-004](architecture/decisions/ADR-004-extend-from-aidlc-orchestrator.md). Sanitization was mechanical and repo-wide:
 
 - Stack-prefix agent renames (`nestjs-*`/`reactjs-*` → `backend-*`/`frontend-*` per viv-routing ADR-003)
 - Routing path standardization (`.claude/context/routing-table.json` → `.claude/routing/routing-table.json`)

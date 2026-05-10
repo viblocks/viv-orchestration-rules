@@ -86,7 +86,7 @@ When a service uses a stack without an existing typed agent:
 
 1. Post-RE or Step 0 marks it as "unmatched"
 2. In Workflow Planning, the orchestrator presents options:
-   - **A)** Create a new typed agent for the stack (see `_common/typed-agent-mechanism.md` — "Extensibility — Adding a New Domain")
+   - **A)** Create a new typed agent for the stack (see `common/typed-agent-mechanism.md` — "Extensibility — Adding a New Domain")
    - **B)** Use `general-purpose` for this service (no domain patterns, lower quality guarantee)
    - **C)** Defer — do not touch this service in this cycle
 3. The decision is recorded in the routing table with the corresponding row

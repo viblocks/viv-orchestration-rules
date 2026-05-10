@@ -4,13 +4,13 @@
 
 | Mode | Authority for SP invocation | Generic SP triggers |
 |---|---|---|
-| **AI-DLC full workflow** (greenfield OR brownfield: Inception → Construction → B&C → Verification) | `_common/superpowers-integration.md` | OVERRIDDEN — only invoke skills where the binding says to |
-| **AI-DLC change flow** (interactive, invoked via "basado en ai dlc change flow VI-XXX") | `_common/core-change-flow-protocol.md` | OVERRIDDEN — only invoke skills where the path protocol says to |
-| **Issue-Driven change flow** (autonomous, post-production) | `_common/core-change-flow-protocol.md` | OVERRIDDEN — only invoke skills where the path protocol says to |
-| **AI-DLC VERIFICATION phase** | `_common/superpowers-integration.md` (VERIFICATION section) | OVERRIDDEN — only invoke skills where the binding says to |
-| **AI-DLC DEPLOYMENT phase** | `_common/superpowers-integration.md` (DEPLOYMENT section) | OVERRIDDEN — only invoke skills where the binding says to |
+| **AI-DLC full workflow** (greenfield OR brownfield: Inception → Construction → B&C → Verification) | `common/superpowers-integration.md` | OVERRIDDEN — only invoke skills where the binding says to |
+| **AI-DLC change flow** (interactive, invoked via "basado en ai dlc change flow VI-XXX") | `common/core-change-flow-protocol.md` | OVERRIDDEN — only invoke skills where the path protocol says to |
+| **Issue-Driven change flow** (autonomous, post-production) | `common/core-change-flow-protocol.md` | OVERRIDDEN — only invoke skills where the path protocol says to |
+| **AI-DLC VERIFICATION phase** | `common/superpowers-integration.md` (VERIFICATION section) | OVERRIDDEN — only invoke skills where the binding says to |
+| **AI-DLC DEPLOYMENT phase** | `common/superpowers-integration.md` (DEPLOYMENT section) | OVERRIDDEN — only invoke skills where the binding says to |
 | **Outside AI-DLC + path Class B** | Default SP behavior (`using-superpowers`) | ACTIVE |
-| **Outside AI-DLC + path Class A** | `_common/core-change-flow-protocol.md` | OVERRIDDEN — apply same formalism as F1-F3 per PF20 |
+| **Outside AI-DLC + path Class A** | `common/core-change-flow-protocol.md` | OVERRIDDEN — apply same formalism as F1-F3 per PF20 |
 
 **Concrete overrides**:
 - `brainstorming` → ONLY at stages marked CONDITIONAL in the binding, NOT "before any creative work"
@@ -27,4 +27,4 @@
 
 **Why**: AI-DLC stages have formal approval gates, audit trails, and sequential dependencies. Generic SP triggers firing out of sequence would break orchestration — e.g., brainstorming at Workspace Detection, or writing-plans at Requirements Analysis.
 
-Core protocol: `_common/core-change-flow-protocol.md` (shared by AI-DLC flow + Issue-Driven flow)
+Core protocol: `common/core-change-flow-protocol.md` (shared by AI-DLC flow + Issue-Driven flow)

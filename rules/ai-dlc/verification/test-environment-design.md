@@ -42,7 +42,7 @@ Present infrastructure baseline summary to the user, then generate clarifying qu
 - **Environment sharing** — Solo developer or team? Persistent environment or ephemeral per test run?
 - **External service access** — Are test/sandbox credentials available for external services? Are there rate limits or cost concerns with external service usage in tests?
 
-**Question format** (per `_common/question-format-guide.md`):
+**Question format** (per `common/question-format-guide.md`):
 - NEVER ask questions in chat — save to .md file
 - Multiple choice: A, B, C options + X) Other (MANDATORY as last option)
 - [Answer]: tag after each question
@@ -101,7 +101,7 @@ For each component:
   - External dependencies (third-party services, blockchain networks, etc.)
 ```
 
-**Output**: Production topology diagram (ASCII or Mermaid — validate syntax per `_common/content-validation.md`).
+**Output**: Production topology diagram (ASCII or Mermaid — validate syntax per `common/content-validation.md`).
 
 ---
 

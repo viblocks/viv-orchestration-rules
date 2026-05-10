@@ -24,11 +24,11 @@ viblocks' CLAUDE.md mixes:
 
 Decomposition:
 - IRON LAW + Routing + Post-Impl Chain → `CLAUDE.template.md` (core)
-- Dispatch protocol detail → `playbooks/dispatch-protocol.md`
-- Post-Impl Chain orchestration → `playbooks/post-implementation-chain.md`
-- AI-DLC integration → `playbooks/ai-dlc-integration.md`
-- SP integration → `playbooks/superpowers-integration.md`
-- Issue-driven flow → `playbooks/issue-driven-flow.md`
+- Dispatch protocol detail → `rules/dispatch-protocol.md`
+- Post-Impl Chain orchestration → `rules/post-implementation-chain.md`
+- AI-DLC integration → `rules/ai-dlc-integration.md`
+- SP integration → `rules/superpowers-integration.md`
+- Issue-driven flow → `rules/issue-driven-flow.md`
 - Worktree hygiene + project extensions → STAY in viblocks-ai
 
 ### 2. Sanitized project-specific tokens
@@ -51,7 +51,7 @@ The orchestration playbooks reference the **structural enforcement** as a guaran
 
 ### 4. Promoted "SP Skill Invocation Override" to a dedicated playbook
 
-viblocks' CLAUDE.md has a critical section explaining SP skill overrides during AI-DLC. Promoted to `playbooks/superpowers-integration.md` with structured authority hierarchy table.
+viblocks' CLAUDE.md has a critical section explaining SP skill overrides during AI-DLC. Promoted to `rules/superpowers-integration.md` with structured authority hierarchy table.
 
 ### 5. Issue-driven flow extracted from Linear coupling
 

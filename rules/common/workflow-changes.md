@@ -306,7 +306,7 @@ User requests change
    - Restarting Stage 7 (CI Pipeline) → reset Stage 8
    - Restarting Stage 8 (Readiness Gate) → no cascade
 4. **Update State**: Reset all affected stage checkboxes in `aidlc-state.md` to `[ ]`
-5. **SP Adjustment**: Per `_common/superpowers-integration.md` Mid-Workflow Changes — re-evaluate skill bindings for all reset stages
+5. **SP Adjustment**: Per `common/superpowers-integration.md` Mid-Workflow Changes — re-evaluate skill bindings for all reset stages
 6. **Re-execute**: Start the target stage from Step 1
 7. **Log**: Document cascade and rationale in `audit.md`
 

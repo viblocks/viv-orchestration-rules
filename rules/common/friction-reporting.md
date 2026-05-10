@@ -7,7 +7,7 @@
 ## What counts as friction
 
 - A plugin hook blocked something the AIDLC stage required
-- A rule file (this directory tree, `playbooks/`) gave unclear or contradictory instruction
+- A rule file (this directory tree, `rules/`) gave unclear or contradictory instruction
 - A typed-agent template rendered with leftover `{{placeholders}}` or had wrong-domain prose
 - A plugin-grade skill (`root-cause-discipline`, `owasp-security`, etc.) lacked a pattern needed for the task
 - A plugin script errored or produced wrong output

@@ -20,8 +20,8 @@ A naive extraction could:
 The typed-agents strategy **references** AI-DLC and Superpowers as external systems but does **NOT bundle** them.
 
 `viv-orchestration-rules` ships:
-- `playbooks/ai-dlc-integration.md` — describes how typed agents bind to AI-DLC stages
-- `playbooks/superpowers-integration.md` — describes how typed agents override SP skill bindings
+- `rules/ai-dlc-integration.md` — describes how typed agents bind to AI-DLC stages
+- `rules/superpowers-integration.md` — describes how typed agents override SP skill bindings
 
 These playbooks are **integration documentation**. They tell the consumer: "if you use AI-DLC, here's how it interacts with this strategy." They do NOT redistribute AI-DLC's rule details or SP's skills.
 

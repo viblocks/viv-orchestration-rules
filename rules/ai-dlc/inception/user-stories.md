@@ -126,7 +126,7 @@ For medium priority cases, execute user stories if ANY of these apply:
 
 **CRITICAL**: Default to asking questions when there is ANY ambiguity or missing detail that could affect story quality. It's better to ask too many questions than to create incomplete or unclear stories.
 
-**See `_common/question-format-guide.md` for question formatting rules**
+**See `common/question-format-guide.md` for question formatting rules**
 
 - EMBED questions using [Answer]: tag format
 - Focus on ANY ambiguities, missing information, or areas needing clarification
