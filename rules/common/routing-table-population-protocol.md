@@ -19,6 +19,34 @@ Two scenarios without coverage:
 
 Two population moments, same action: detect service without a row, classify stack, add row.
 
+### Ad-hoc adoption (no SDLC orchestrator) — use `/typedAgentSetup`
+
+For projects adopting typed-agents **without** an SDLC orchestrator (no AI-DLC, no Reverse Engineering stage producing `component-inventory.md`), the recommended path is the `/typedAgentSetup` wizard shipped with `viv-typed-agents` (tier 3+).
+
+After running `scripts/install.sh`, invoke the wizard in Claude Code:
+
+```
+> /typedAgentSetup
+```
+
+The wizard automates **Moment 1** for ad-hoc adoption:
+
+1. Detects project state (greenfield vs brownfield)
+2. Discovers candidate service folders (stack-agnostic)
+3. Classifies each as `backend` / `frontend` / `ambiguous` via skill-declared `detection:` signatures
+4. Asks for the project's business domain (Crypto, WaaS, Generic)
+5. Resolves agents via `(domain, business_domain, type)` lookup
+6. Writes `.claude/routing/routing-table.json` (idempotent, preserves hand-edits) plus the conditional tier-4 / tier-5 outputs
+
+See `viv-typed-agents/architecture/specs/2026-05-09-typed-agent-setup.md` for the full design.
+
+The manual protocol below remains canonical for:
+- **Orchestrator-integrated adoption** — where an SDLC orchestrator (e.g. AI-DLC) wires Moment 1 as a post-RE step, consuming inventory + stack artifacts to drive population programmatically
+- **Moment 2** — incremental population when a new service is introduced mid-lifecycle (the wizard targets initial setup, not per-service additions)
+- **Edge cases** — projects with non-standard layouts the wizard's discovery doesn't cover
+
+---
+
 ### Moment 1 — Bulk Population (brownfield first adoption)
 
 **When**: When typed-agents is first adopted in an existing project. Orchestrators with a Reverse Engineering stage typically wire this in as a post-RE step (right after RE completes, before Requirements Analysis); ad-hoc adoption runs it once during initial setup.
