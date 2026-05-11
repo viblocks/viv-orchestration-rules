@@ -8,6 +8,25 @@ User says: "fix `<ISSUE_ID>`", "work on `<ISSUE_ID>`", or pastes an issue URL.
 
 `<ISSUE_ID>` format is consumer-defined — `VI-123` (Linear), `gh-42` (GitHub), `JIRA-PROJ-9` (Jira), etc.
 
+## Issue-tracker adapter contract
+
+Consumers must provide a binary named `issue-tracker` on PATH that satisfies
+[`viv-workflows/schemas/issue-tracker-adapter-contract.schema.json`](../../viv-workflows/schemas/issue-tracker-adapter-contract.schema.json).
+The protocol below invokes the adapter via abstract verbs (`view`, `query`,
+`begin`, `finish`, `comment`, `close`) — never the provider's native CLI.
+
+Reference adapters:
+
+| Provider | Repo | Status |
+|---|---|---|
+| Linear | `viblocks/issue-tracker-linear` | beta |
+| GitHub Issues | — | roadmap |
+| Jira | — | roadmap |
+
+The consumer selects the active adapter via `.issue-tracker.toml` at repo
+root. Switching providers is a one-line config change; the protocol is
+unaffected.
+
 ## The triage gate
 
 Read the issue. Evaluate four questions in order. **First match wins.**
@@ -42,16 +61,17 @@ If none of Q1-Q4 match cleanly, escalate to the user.
 
 ### DIRECT (autonomous)
 
-1. Read the issue (description + acceptance criteria)
+1. `issue-tracker view <ID>` — read the issue (description + acceptance criteria)
 2. Identify the target paths
 3. Resolve the implementer per routing-table
-4. Dispatch the typed implementer with:
+4. `issue-tracker begin <ID>` — mark in progress
+5. Dispatch the typed implementer with:
    - Issue context
    - Acceptance criteria
    - **`Root cause:`** field if this is a fix (per `fix-intent-pattern.json`)
-5. Run the post-implementation chain
-6. Commit with `Audit-Trail: <ISSUE_ID>` trailer
-7. Close the issue with evidence per `evidence-schema.json`
+6. Run the post-implementation chain
+7. Commit with `Audit-Trail: <ISSUE_ID>` trailer
+8. `issue-tracker finish <ID> --evidence <file>` — close with evidence per `evidence-schema.json`
 
 ### CROSS-DOMAIN (supervised)
 
